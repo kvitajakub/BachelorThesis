@@ -1,0 +1,1144 @@
+
+%\listoftodos
+\listoffigures
+
+\chapter{Úvod}
+
+V souèasnosti je poèítaèová grafika masivnì vyu¾ívána ve filmech, poèítaèových hrách a dal¹ích oblastech a tvùrci po¾adují vysokou realistiènost pøi nízkých nákladech. Tyto vlastnosti obsahují L-systémy a ukázaly se jako velmi vhodná cesta pøi modelování rostlinných struktur. Je mo¾né s nimi vytváøet na jedné stranì jednoduché modely kvìtin a na druhé obrovské lesy, se stejným stupnìm detailù v obou pøípadech. Druhým faktorem je nároènost takových modelù, která je v ostatních pøípadech velmi vysoká, ale to neplatí pro tyto systémy. Jeden pøíklad za v¹echny: model lesa do posledního listu zabírá ve zdrojové podobì v poèítaèi asi stejnì pamìti, jako jeho fotografie.
+
+Mým cílem bylo vytvoøit interaktivní systém pro generování 3D modelù s pou¾itím tìchto L-systémù. Rozhodl jsem se, ¾e souèástí generátoru bude i prohlí¾eè výsledných modelù s jednoduchými funkcemi, proto¾e s výsledným systémem se bude pracovat lépe a rychleji, kdy¾ bude mít integrované v¹echny souèásti a u¾ivatel nebude potøebovat dal¹í aplikace. 
+
+V kapitole~\ref{cha:l-systemy} popisuji základy L-systémù a formálních jazykù, jak L-systémy vznikly a jejich druhy. Jejich interpretaci pro 2D i 3D modelování vysvìtluji v kapitole \ref{cha:zelva}. V dal¹í kapitole (\ref{cha:vykreslovani}) jsou vylo¾eny rùzné mo¾nosti vykreslování 3D objektù. \ref{cha:aplikace}. kapitola kombinuje teoretické znalosti z pøede¹lých kapitol a popisuji zde mou aplikaci pro generování objektù, vèetnì základního grafického rozhraní. Následující kapitola \ref{cha:ukazky} obsahuje pøíklady modelù vygenerovaných ve vytvoøené aplikaci s jejich zdrojovým tvarem, jak vstupoval do generátoru. V poslední kapitole (\ref{cha:zaver}) jsem zhodnotil výsledky a dal¹í vývoj systému.
+
+\chapter{L-systémy}
+	\label{cha:l-systemy}
+
+Teorii tìchto systémù vytvoøil v ¹edesátých letech maïarský biolog Aristid Lindenmayer a na jeho poèest jsou pojmenovány jako Lindenmeyerovy systémy (ve zkratce L-systémy). Zpoèátku slou¾ily pro popis vývoje bunìèných struktur jednoduchých rostlin, ale ukázalo se, ¾e jejich mo¾nosti jsou vìt¹í a jdou pou¾ít i ke slo¾itìj¹ím úlohám jako jeden z mo¾ných nástrojù, jak popisuje v \cite{beauty}. L-systémy je mo¾no pou¾ít i v jiných oblastech, ne¾ je grafika, napø. pro generování fraktálové hudby (viz. \cite{hudba}) nebo \emph{DNA computing} a dal¹í (viz. \cite{handbook1volchap}).
+
+L-systém je druh formální gramatiky a základním konceptem je zde pøepisování a pøepisovací pravidla. Mohou se pou¾ívat køivky, které se rùznì mìní a vznikají fraktály. Jednou z nejznámìj¹ích ukázek je Kochova\footnote{Helge von Koch (1870 - 1924) ¹védský matematik} køivka nìkdy také nazývaná Kochova vloèka~\cite{webKoch}. Ta se skládá ze dvou èástí - úvodního obrazce - trojúhelníka a pravidla, které pou¾ívá køivku podobnou støí¹ce. Oba jsou na obrázku \ref{fig:kochVlocka}. Pravidlo vyobrazené v horní èásti zní takto: Ka¾dou úseèku nahraï køivkou, úseèka i køivka mají spoleèný poèáteèní a koncový bod. Toto pravidlo je mo¾no pou¾ít kolikrát chceme - vznikají dal¹í generace/iterace modelu. Ve druhé polovinì obrázku je vidìt nìkolik prvních iterací a limitnì zde vzniká fraktál podobný vloèce.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{fig/koch.pdf}
+\caption{Kochova vloèka a její první 4 generace. Pøevzato z \cite{handbook3volchap}.}
+\label{fig:kochVlocka}
+\end{figure}
+
+Na L-systémy je mo¾no nahlí¾et jako paralelní protiklad k sekvenèní hierarchii Chomského gramatik(viz. \cite{handbook} a \cite{automata}). Jak je vidìt u pøíkladu z Kochovou vloèkou, pravidla se aplikují na v¹echny úseèky(symboly) paralelnì, místo postupné aplikace na ka¾dou úseèku zvlá¹» - tzn. kromì derivací zde mluvíme také o iteracích a o jednotlivých stavech celého objektu (obrazce, øetìzce, \dots). Stejnì jako Chomského gramatik, L-systémù je vìt¹í mno¾ství, které se li¹í vlastnostmi a schopnostmi - konkrétnìji jsou popsány v podkapitole \ref{sec:druhy}. Obì dvì rodiny sdílí základní kameny formálních jazykù, jako je napøíklad zavedení pojmù \emph{abecedy} a \emph{øetìzce} atp., které jsou potøeba pro jejich definice - ty jsou vysvìtleny v podkapitole \ref{sec:uvodFormJ}.
+
+V paralelním pøístupu se blí¾í L-systémy celulárním automatùm - pøíkladem mù¾e být hra Life od Johna Conwaye~\cite{gameOfLife}. Celulární automaty také pracují na biologickém principu, ¾e v¹e se dìje zároveò(paralelnì) a mù¾eme pozorovat stavy, kterými prochází celý model. Nejvìt¹í podobnost lze vysledovat s jednorozmìrnými automaty, které mají stejnì jako okolí øetìzcù pouze dva stavy - pøed prvkem a za prvkem. Tato podobnost je èistì vizuální, základní principy celulárních automatù jsou jiné a pou¾ívají se k naprosto odli¹ným pøípadùm, které jsou napøíklad popsány v \cite{cellular}.
+
+\section{Úvod do formálních jazykù}
+	\label{sec:uvodFormJ}
+
+V této podkapitole vysvìtlím základní pojmy, na kterých budu stavìt pøi definici L-systémù. Hlavními pojmy jsou \emph{abeceda}, \emph{øetìzec} a \emph{jazyk}, kromì nich i zavedení jejich mno¾in, které se bì¾nì pou¾ívají u formálních jazykù. Øetìzec je mo¾né oznaèovat jako \emph{slovo} - budu tyto dva pojmy v dal¹ím textu zamìòovat.
+
+Pro pochopení této a dal¹ích kapitol je tøeba základních znalostí o mno¾inách, relacích a funkcích. Potøebné informace lze nalézt napøíklad v úvodu \cite{automata}. Definice, které jsou zde uvedeny také pochází ze zmínìné knihy spoleènì s jejich výkladem. Jako dal¹í zdroj definic jsem pou¾il \cite{handbook}.
+
+\begin{definition}
+\textbf{abeceda a symboly} \newline
+\emph{Abeceda} je neprázdná, koneèná mno¾ina prvkù, které jsou nazývány \emph{symboly}.
+\end{definition}
+
+Se symboly mù¾eme vytváøet øetìzce, které jsou, stejnì jako slova, tvoøeny posloupností symbolù urèité abecedy. Také je potøeba definovat prázdný øetìzec, ve kterém není ani jeden symbol. Tento øetìzec se oznaèuje znakem $\varepsilon$. Zde je uvedena rekurzivní definice øetìzce:
+
+\begin{definition}
+\textbf{øetìzec} \newline
+Nech» $\Sigma$ je abeceda.
+\begin{enumerate*}  
+   \item $\varepsilon$ je øetezec nad $\Sigma$.
+   \item Pokud \emph{x} je øetìzec nad $\Sigma$ a $\emph{a}\ \epsilon\ \Sigma$, pak \emph{xa} je øetìzec nad $\Sigma$.
+\end{enumerate*}
+\end{definition}
+
+Délka øetìzce je intuitivnì øeèeno poèet symbolù v øetìzci.
+
+\begin{definition}
+\textbf{délka øetìzce} \newline
+Nech» \emph{x} je øetìzec nad abecedou $\Sigma$. \emph{Délka} øetìzce \emph{x}, $|x|$, je následující:
+\begin{enumerate*}  
+   \item Pokud je $x = \varepsilon$, pak $|x|=0$. 
+   \item Pokud je $x = a_1\dots a_n $, pro nìjaké $n>=1$, kde $a_i\ \epsilon\ \Sigma$ pro v¹echna $i=1,\dots,n$, pak $|x|=n$. 
+\end{enumerate*}
+\end{definition}
+
+Pro definici jazyka je potøeba nejdøíve zavést $\Sigma^*$ jako mno¾inu v¹ech øetìzcù nad abecedou $\Sigma$ a dále
+\begin{equation*}
+\Sigma^+ = \Sigma^* - {\varepsilon},
+\end{equation*}
+neboli $\Sigma^+$ je mno¾ina v¹ech neprázdných slov nad $\Sigma$. Jazyk je urèitá mno¾ina slov nad abecedou $\Sigma$.
+
+\begin{definition}
+\textbf{jazyk} \newline
+Nech» je abeceda $\Sigma$ a $\emph{L}\ \subseteq\ \Sigma^*$. Pak je \emph{L} \emph{jazyk} nad abecedou $\Sigma$.
+\end{definition}
+
+\begin{definition}
+\textbf{koneèný a nekoneèný jazyk} \newline
+Nech» L je jazyk. L je \emph{koneèný} pokud obsahuje koneèný poèet slov, jinak je L \emph{nekoneèný}.
+\end{definition}
+
+Jazyky jsou podle definice mno¾iny, tak¾e nad nimi lze provádìt mno¾inové operace jako prùnik, sjednocení a rozdíl jako s jinými mno¾inami a doplnìk je definován takto
+\begin{equation*}
+\overline{L} = \Sigma^* - L,
+\end{equation*}
+kromì nich jsou nad jazyky definovány i dal¹í operace, napø. konkatenace a reverzace, které nebudu v této práci potøebovat. Jejich definice jsou uvedeny v \cite{automata}.
+
+\section{Druhy L-systémù}
+	\label{sec:druhy}
+
+Postupem èasu se vyvinulo nìkolik skupin L-systémù, jedny z hlavních jsou zejména T0L, E0L a ET0L systémy. Jejich jména se øídí pravidly pojmenování, která byla zavedena a zaji¹»ují okam¾ité porozumìní v¹emi, kteøí s nimi pracují. Jména jednotlivých druhù se skládají z písmen a èíslic, která mají pøesnì definovaný význam a popisují vlastnosti L systémù. Napøíklad v¹echny typy L systémù obsahují v názvu písmeno L na znamení toho, ¾e jsou druhem Lindenmayerových systémù. Klíèovou vlastností je bezkontextovost - pravidla nezávisí na okolí pøepisovaného symbolu. Pøi výkladu týkajícím se rostlin je to mo¾né popsat tak, ¾e neexistuje interakce mezi jednotlivými buòkami nebo segmenty rostliny. Bezkontextové L systémy se oznaèují èíslicí \emph{0}. Její význam bude jasný po popisu kontextových L-systémù, které se souhrnnì oznaèují písmenem I. Nejprve definuji základní 0L systém a derivaci, kterou uká¾u na pøíkladu. Jednotlivé druhy a jejich vlastnosti jsou popsány v dal¹ích èástech této èásti kapitoly. Hlavní rozdìlení je na 0L a IL systémy, ale jednotlivé vlastnosti mohou být souèástí jedné i druhé skupiny.
+
+Vìt¹inu typù jsem pøevzal z \cite{handbook1volchap} s dodatky z \cite{beauty}. První kniha se vìnuje hlavnì L-systémùm z pohledu formálních jazykù, zatímco druhá nejvíce tìm druhùm, které usnadòují a vylep¹ují modelování rostlin - napø. parametrické L-systémy.
+
+\begin{definition}
+\label{def:olsystem}
+\textbf{0L systém} \newline
+\emph{0L systém} je uspoøádaná trojice $ G = (V,\omega,P) $, kde \emph{V} je abeceda systému, $\omega\ \epsilon\ V^+$ je neprázdné slovo nazývané \emph{axiom} a $ P \subset V \times V^*$ je koneèná mno¾ina pravidel. Pravidlo $(a,\chi)\ \epsilon\ P $ se zapisuje ve tvaru $a \rightarrow \chi$. Pøedpokládá se, ¾e pro ka¾dé $a\ \epsilon\ V$ existuje alespoò jedno pravidlo ve tvaru $a \rightarrow \chi$. Pokud neexistuje, zavádí se pravidlo identity ve tvaru
+$a \rightarrow a$.
+\end{definition}
+
+\begin{definition}
+\textbf{derivace} \newline
+Nech» $\mu = a_1 \dots a_m$ je øetìzec nad \emph{V}. Øetìzec $\nu = \chi_1 \dots \chi_m\ \epsilon\ V^*$ je pøímo derivován (generován) z $\mu$, psáno $\mu \Rightarrow \nu$, právì tehdy, kdy¾ existuje pravidlo $a_i \rightarrow \chi_i$ pro ka¾dé $i = 1,\dots,m$. $\nu$ se nazývá \emph{produkt} derivace. Øetìzec $\nu$ je generován derivací o \emph{délce} $n$ tak, ¾e $\mu=\mu_0$ a $\nu=\mu_n$, pokud existuje $n$ na sebe navazujících derivací ve tvaru $\mu_0\Rightarrow\mu_1\Rightarrow\dots\Rightarrow\mu_n$.
+\end{definition}
+
+Klíèový rozdíl u derivací oproti gramatikám Chomského hierarchie je, ¾e zde pova¾ujeme za derivaci aplikaci právì jednoho pravidla na ka¾dý symbol øetìzce, klidnì to mù¾e být pravidlo identity, a u gramatik jde o aplikaci právì jednoho pravidla na právì jeden symbol.
+
+\begin{example}
+Zde je ukázka jednoduchého 0L systému. První ètyøi derivace jsou na obrázku \ref{fig:derivace}. Kromì jiného, jsou zde zajímavá automaticky vytvoøená pravidla $p_{5i}$ a $p_{6i}$, která jsou identitou a jediným pravidlem pro symboly $e$ a $f$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ a $} \\
+$ p_1 $ &: & $ a $ & $ \rightarrow $ & $ bc $ \\
+$ p_2 $ &: & $ b $ & $ \rightarrow $ & $ aed $ \\
+$ p_3 $ &: & $ c $ & $ \rightarrow $ & $ dea $ \\
+$ p_4 $ &: & $ d $ & $ \rightarrow $ & $ f $ \\
+$ p_{5i} $ &: & $ e $ & $ \rightarrow $ & $ e $ \\
+$ p_{6i} $ &: & $ f $ & $ \rightarrow $ & $ f $ 
+\end{tabular}
+\end{center}
+\end{example}
+\begin{figure}
+\centering
+\includegraphics[keepaspectratio=true]{fig/derivace.pdf}
+\caption{První ètyøi derivace ukázkového DOL-systému.}
+\label{fig:derivace}
+\end{figure}
+
+\subsection{Druhy 0L systémù}
+	\label{subsec:olsys}
+
+Jednou z dùle¾itých vlastností je determinismus systému. Stav systému v budoucnosti se dá odvodit z jeho souèasného stavu a pevnì daných pravidel, proto¾e pro ka¾dý stav existuje právì jeden následující stav. Tato vlastnost u L-systému se oznaèuje písmenem \emph{U} a má následující definici.
+
+\begin{definition}
+\label{def:deterLsys}
+\textbf{deterministický L-systém} \newline
+Systém $ G = (V,\omega,P) $ je deterministický, jestli pro ka¾dé $ a\ \epsilon\ V $ existuje nejvý¹e jedno pravidlo ve  tvaru $ (a \rightarrow \chi)\ \epsilon\ P$.
+\end{definition}
+
+V základní definici 0L systémù je mo¾né mít více pravidel se stejnou levou stranou. Ve \emph{stochastických} L-systémech, lze tìmto pravidlùm pøiøadit pravdìpodobnosti, jak èasto se pou¾ijí. Tento typ se hodí napøíklad pro simulace, proto¾e lze zajistit urèitou variabilitu jednotlivých modelù a zároveò spoleèné vlastnosti, ale pro jiné èinnosti, napø. popis programovacích/pøirozených jazykù, je nevhodný nebo nesmyslný. Lze pak generovat modely, které vypadají jako rùzní jedinci jednoho druhu rostliny. Základní 0L systémy si mù¾eme pøedstavit jako stochastické systémy, ve kterých mají pravidla shodnou pravdìpodobnost.
+
+\begin{definition}
+\label{def:stochLsys}
+\textbf{stochastický L-systém} \newline
+Stochastický L-systém je uspoøádaná ètveøice $G_\pi = (V,\omega,P,\pi)$. Abeceda $V$, axiom $\omega$ a mno¾ina pravidel $P$ jsou definovány stejnì jako u 0L-systému. Funkce rozdìlení pravdìpodobnosti $\pi : P \rightarrow (0,1]$ mapuje jednotlivá pravidla na jejich pravdìpodobnosti jak èasto se pou¾ijí. Souèet pravdìpodobností v¹ech pravidel se stejnou levou stranou musí být 1.
+\end{definition}
+
+\begin{example}
+\label{exa:stoch}
+Zde je jednoduchá ukázka stochastického 0L systému pøevzatá z \cite{beauty}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ F $} \\
+$ p_1 $ &: & $ F $ & $ \overset{.33}{\rightarrow} $ & $ F[+F]F[-F]F $ \\
+$ p_2 $ &: & $ F $ & $ \overset{.33}{\rightarrow} $ & $ F[+F]F $ \\
+$ p_3 $ &: & $ F $ & $ \overset{.34}{\rightarrow} $ & $ F[-F]F $ \\
+\end{tabular}
+\end{center}
+\end{example}
+
+Dal¹í typ je oznaèovaný písmenem \emph{P} z anglického \emph{propagating}. Jsou to systémy jejich¾ pravidla nemají na pravé stranì $\varepsilon$. Zjednodu¹enì øeèeno nedochází zde k vymazání a zániku symbolù. V \cite{handbook1volchap} toto oznaèují jako \emph{cell death} a v této knize je také o P0L systémech popsáno více. Tento typ má pou¾ití zvlá¹tì pøi vytváøení rùstových funkcí, kdy nás nezajímá, jaké symboly jsou v øetìzci obsa¾eny, ale pouze jeho délka, kterou je mo¾no modelovat témìø jakoukoli èíselnou posloupnost.
+
+Pøi generování jazykù zatím uvedenými systémy je výrazným faktorem to, ¾e musíme pøijmout v¹echny øetìzce vygenerované systémem. Pokud je potøeba urèitá slova vylouèit v D0L systémech to nejde - nemají ¾ádný filtrovací mechanismus. Základní filtrací v Chomského gramatikách je pou¾ití neterminálních symbolù. Pokud se nìjaký objeví ve slovì znamená to, ¾e slovo není mo¾no pøijmout a nepatøí do jazyka. Stejný princip je mo¾no zavést do L-systémù, rozdìlit abecedu na dvì disjunktní mno¾iny terminálù a neterminálù. Pravidla a slova mohou obsahovat symboly z obou mno¾in, ale pøijímaný jazyk se skláda pouze ze slov tvoøených symboly z mno¾iny terminálù. Tyto systémy se oznaèují písmenem \emph{E} (\emph{extended}). Musím upozornit na to, ¾e pùvodnì bylo cílem L-systémù popisovat vývoj organismù a ka¾dý derivovaný øetìzec popisoval stav organismu. Je proto nepøirozené, najednou vyluèovat urèitá slova, s tím, ¾e nepopisují rùst organismu. Postupem èasu se zkoumání tìchto typù ukázalo jako velmi plodné a E0L systémy tvoøí dùle¾itou skupinu.
+
+Velmi významným prvkem v paralelních systémech je pou¾ití tabulek. Druh systémù s tabulkami se oznaèuje pomocí písmene \emph{T}. Tabulka je mno¾ina pravidel, která se pou¾ijí pøi jedné derivaci. Systém obecnì obsahuje libovolné mno¾ství tìchto tabulek, která se v derivacích rùznì støídají. Tímto je mo¾né modelovat zmìny pøi vývoji organismu, napøíklad rùzné vývojové stupnì nebo zmìny okolního prostøedí (støídání dne a noci, roèních období, zneèi¹tìní, \dots).
+
+\begin{definition}
+\textbf{T0L systém} \newline
+\emph{T0L systém} je uspoøádaná trojice $G = (\Sigma,S,\omega)$, kde S je koneèná mno¾ina mno¾in pravidel taková, ¾e pro ka¾dé $\sigma\ \epsilon\ S$, trojice $(\Sigma,\sigma,\omega)$ je 0L systém. Pøi derivaci je mo¾no pou¾ít libovolnou mno¾inu z prvkù mno¾iny $S$, ale ta musí být pro v¹echny symboly stejná.
+\end{definition}
+
+Jednotlivé druhy systémù mohou obsahovat více vlastností zároveò, jako jsou napø. ET0L systémy, které kombinují neterminály a tabulky, jsou nejvìt¹í podrobnì zkoumanou skupinou bezkontextových L-systémù, nebo DE0L systémy, které, jak u¾ název napovídá, jsou bezkontextové, deterministické a pou¾ívají neterminály. Typy, které jsem uvedl nejsou v¹echny, existuje mnoho dal¹ích. Nìkolik dal¹ích z nich je uvedeno v podkapitole \ref{subsec:ostatsys}.
+
+\subsection{IL systémy}
+	\label{subsec:ilsys}
+	
+\emph{IL systémy} jsou kontextové L-systémy neboli systémy s \emph{interakcemi}. Podle tohoto slova jsou obecnì pojmenovány písmenem \emph{I}. Pøi derivaci zde pou¾ití pravidla závisí nejen na vstupním symbolu, ale také na jeho kontextu - jaké symboly má kolem sebe. Tento princip je velmi u¾iteèný napøíklad pøi simulaci proudìní informací nebo toku ¾ivin a vody v rostlinách.
+
+Tyto systémy se oznaèují jako $(m,n)$L systémy, kde $m,n \ge 0$. V \cite{handbook1volchap} pravidla v tìchto systémech vypadají takto
+\begin{equation*}
+(\alpha,a,\beta)\rightarrow \omega ,\ |\alpha|=m ,\ |\beta|=n
+\end{equation*}
+a podle \cite{beauty} následovnì
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccccl}
+$ \alpha $ & $ < $ & $ a $ & $ > $ & $ \beta $ & $ \rightarrow $ & $ \omega $ \\
+\end{tabular}
+\end{center}
+$\alpha$ a $\beta$ zde jsou \emph{levý} a \emph{pravý kontext} a pravidlo znamená, ¾e symbol \emph{a} je mo¾né pøepsat na øetìzec $ \omega $, pouze pokud je mezi øetìzci $\alpha$ a $\beta$. Aby bylo mo¾no dostat dostateèný poèet symbolù pro oba kontexty, celý pøepisovaný øetìzec je umístìn mezi \emph{m} a \emph{n} \emph{symbolù prostøedí} \emph{\#}.
+
+Oznaèení IL systém je spoleèné jméno pro v¹echny $(m,n)$L systémy. $(1,0)$L a $(0,1)$L systémy jsou pojmenovány jako \emph{1L systémy}, proto¾e je v nich interakce pouze jednostranná. Tyto systémy mù¾eme zapisovat následovnì:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccccl}
+$ \alpha $ & $ < $ & $ a $ &       &           & $ \rightarrow $ & $ \omega $ \\
+           &       & $ a $ & $ > $ & $ \beta $ & $ \rightarrow $ & $ \omega $ \\
+\end{tabular}
+\end{center}
+
+Po tomto výkladu koneènì zaène dávat smysl oznaèení bezkontextových systémù \emph{0L} - není v nich interakce ani s jednou stranou. V \cite{beauty} jsou systémy pou¾ívající oba kontexty nazvány \emph{2L} systémy.
+
+Pou¾ití písmen D, E, P, \dots\ je úplnì stejné jako pøedtím, ov¹em s drobnými zmìnami. \emph{Determinismus} napøíklad znamená, ¾e nemù¾e být více pravidel se stejnou levou stranou a zároveò se stejným \emph{(m,n)} okolím. Pro kontextové systémy s pravdìpodobností platí stejná my¹lenka a pravdìpodobnost se urèuje zvlá¹» pro ka¾dou skupinu pravidel, která mají stejnou nejen levou stranu, ale i kontext.
+
+Pøi interpretaci kontextových systémù ¾elví grafikou je tøeba s kontextem pracovat jiným zpùsobem, aby systém odrá¾el reálné chování rostlin. Hlavní my¹lenkou je pøeskakování symbolù, které sice mají podobné místo v øetìzci, ale v modelu spolu vùbec nemusí souviset. Tento princip jsem popsal v èásti \ref{sec:zelvikontext}.
+
+\begin{example}
+\label{exa:kontext}
+Jednoduchý pøíklad kontextového systému, který mù¾e simulovat napøíklad prùchod signálu øetìzcem. Tento systém jsem pøevzal z \cite{beauty}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccccl}
+$ \omega $ &: & \multicolumn{5}{l}{$ baaaaaaaaa $} \\
+$ p_1 $ &: & $ b $ & $ < $ & $ a $ & $ \rightarrow $ & $ b $ \\
+$ p_2 $ &: &       &       & $ b $ & $ \rightarrow $ & $ a $ \\
+\end{tabular}
+\end{center}
+
+Nìkolik prvních øetìzcù vygenerovaných tímto systémem nasleduje:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c}
+ $ baaaaaaaaa $  \\
+ $ abaaaaaaaa $  \\
+ $ aabaaaaaaa $  \\
+ $ aaabaaaaaa $  \\
+ $ aaaabaaaaa $  \\
+\vdots 
+\end{tabular}
+\end{center}
+
+Podobnì lze modelovat zaplavování systému urèitým symbolem, v na¹em pøípadì \emph{b}. Systém by mìl pouze jedno pravidlo a místo $p_2$ by se pou¾ila identita.
+\end{example}
+
+\subsection{Parametrické L-systémy}
+	\label{subsec:paramsys}
+
+Zatím uvedené L-systémy mohou slou¾it k rozmanité ¹kále èinností, ale jedno mají spoleèné - pracují s diskrétní pøedstavou svìta. Pokud bychom chtìli reprezentovat velièiny, které jsou v základu spojité, s pøijatelnou odchylkou, velikost systémù by velmi narostla, a¾ do stovek symbolù a pravidel, a tím bychom pøi¹li o základní princip L-systémù, kterým je jednoduchost. Podle \cite{beauty}, Lindenmayer pøi¹el s øe¹ením, ¾e symboly systému budou obsahovat èíselné parametry, které budou reprezentovat spojitý vývoj rostlin. Prusinkiewicz a Hanan tuto my¹lenku dále rozpracovali a Hanan ji pøedkládá ve své disertaèní práci, viz. \cite{hananphd}. Nìkteré èásti této podkapitoly jsou pøevzaty z \cite{beauty}.
+
+Symbol \emph{A} z abecedy systému $ V $ v parametrickém øetìzci se spoleènì s parametry z mno¾iny reálných èísel $ \mathbb{R} $ nazývají \emph{modul} a zapisují se $ A(a_1,a_2,\dots,a_n) $. Ka¾dý modul patøí do mno¾iny $ M = V \times \mathbb{R}^* $, kde $ \mathbb{R}^* $ je mno¾ina v¹ech koneèných posloupností parametrù.V øetìzcích modulù se tedy objevují \emph{skuteèné} parametry, co¾ jsou reálná èísla. Zároveò korespondují s \emph{formálními} parametry, které se objevují v pravidlech. Ty jsou reprezentovány promìnnými. Dále pokud je $ \Sigma $ mno¾ina formálních parametrù, pak $ C(\Sigma) $ je mno¾ina v¹ech \emph{logických výrazù} s parametry z $ \Sigma $ a $ E(\Sigma) $ je mno¾ina v¹ech \emph{aritmetických výrazù} z $ \Sigma $. Oba typy výrazù se skládají z formálních parametrù a èíselných konstant, aritmetických operátorù, operátorù porovnání a dal¹ích prvkù podle standardních principù v matematice. Logické výrazy se vyhodnocují jako $ 1 $ pro pravdu a $ 0 $ pro nepravdu. Ukázky v¹ech tìchto mno¾in jsou na pøíkladu \ref{exa:paramsys}, spoleènì s pravidly a derivací jak jsou dále definovány.
+
+\begin{definition}
+\textbf{parametrický 0L systém} \newline
+Parametrický 0L systém je uspoøádaná ètveøice $ G=(V,\varSigma,\omega,P) $, kde $ V $ je abeceda systému, $ \varSigma $ je mno¾ina formálních parametrù, $ \omega\ \epsilon\ (V \times \mathbb{R}^*)^+ $ je neprázdný parametrický øetìzec nazvaný axiom a $ P \subset (V \times \varSigma^*)\times C(\varSigma) \times (V \times E(\varSigma))^* $ je koneèná mno¾ina pravidel.
+\end{definition}
+
+V pravidlech se pou¾ívají symboly $ : $ a $ \rightarrow $ pro oddìlení vstupu pravidla, podmínky a výstupu. Napøíklad pravidlo pøepisující modul $ A(t) $ na $ B(t+1)CD(t^{0.5},t-2) $ za podmínky $ t>5 $ se zapí¹e takto
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ A(t) $ & $ : $ & $ t>5 $ & $ \rightarrow $ & $ B(t+1)CD(t^{0.5},t-2) $. \\
+\end{tabular}
+\end{center}
+Pravidlo je aplikováno na symbol øetìzce (modul), jestli¾e platí následující podmínky:
+\begin{itemize*}
+\item symbol v øetìzci a na levé stranì pravidla se shodují,
+\item oba moduly mají shodný poèet parametrù a
+\item podmínka uvedená v pravidle je vyhodnocena jako pravdivá.
+\end{itemize*}
+
+\begin{example}
+\label{exa:paramsys}
+Jednoduchý parametrický 0L systém pøevzatý z \cite{beauty}, spoleènì s nìkolika prvními derivacemi. Nad symbolem derivace jsou pravidla, která se aplikovala na jednotlivé moduly ve stejném poøadí jak jsou napsána, pro lep¹í pochopení principu.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccccl}
+$ \omega $ &: & \multicolumn{5}{l}{$ B(2)A(4,4) $} \\
+$ p_1 $ & : & $ A(x,y) $ & : & $ y \leq 3 $ & $ \rightarrow $ & $ A(x*2,x+y) $ \\
+$ p_2 $ & : & $ A(x,y) $ & : & $ y > 3 $ & $ \rightarrow $ & $ B(x)A(x/y,0) $ \\
+$ p_3 $ & : & $ B(x) $   & : & $ x < 1 $ & $ \rightarrow $ & $ C $ \\
+$ p_4 $ & : & $ B(x) $   & : & $ x \geq 1 $ & $ \rightarrow $ & $ B(x-1) $
+\end{tabular}
+\end{center}
+
+\begin{equation*}
+B(2)A(4,4) \overset{[p_4p_2]}{\Rightarrow} B(1)B(4)A(1,0)  \overset{[p_4p_4p_1]}{\Rightarrow} B(0)B(3)A(2,1)  \overset{[p_3p_4p_1]}{\Rightarrow} CB(2)A(4,3)
+\end{equation*}
+\end{example}
+
+Parametrické systémy také lze zkombinovat s kontextovými, pokud potøebujeme interakci mezi jednotlivými symboly. Výsledné systémy mají stejný formát jako ostatní, pouze jsou pravidla komplexnìj¹í.
+
+\begin{example}
+Ukázkové pravidlo parametrického IL systému.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccccccl}
+$ A(x) $ & $ < $ & $ B(y) $ & $ > $ & $ C(z) $ & $ : $ & $ x+y+z > 10 $ & $ \rightarrow $ & $ E(x^2+y)F((y-5)*z) $ \\
+\end{tabular}
+\end{center}
+\end{example}
+
+\subsection{Ostatní}
+	\label{subsec:ostatsys}
+
+Existuje velké mno¾ství druhù L-systémù, které jsem zde neuvedl a jejich popis by zabral velké mno¾ství místa. Na více místech jsem se u¾ odkazoval na \cite{handbook1volchap} kde je jich uvedeno více spoleènì s dal¹ími odkazy. Napøíklad jsou zde popsány systémy, které místo jednoho poèáteèního axiomu obsahují koneènou mno¾inu øetìzcù - axiomù. Takové systémy se oznaèují písmenem \emph{F} z sousloví \emph{finite set of axioms}.
+
+Druhým pøíkladem rozvoje L-systémù jsou systémy s fragmentací. Ta umo¾òuje pomocí øezù blokovat komunikaci a pøenos informací mezi segmenty øetìzce nebo modelovat rozmno¾ení organismu. Pou¾ívá se pro tyto úèely speciálního symbolu napø. \emph{q}, který rozdìluje øetìzec, a derivace mù¾e pokraèovat z ka¾dé èásti øetìzce. Pro tento druh se pou¾ívá oznaèení písmenem \emph{J} - \emph{jakautua}. Toto slovo pochází z fin¹tiny, proto¾e pøi pøedstavení tohoto typu, v¹echna písmena, kterými zaèínají vhodná slova v angliètinì byla zabrána.
+
+Posledním pøíkladem jsou \emph{UL systémy}, které pou¾ívají abecedu obsahující pouze jeden symbol. Jméno mají podle anglického slova \emph{unary.}
+
+%====================================================================================================================================
+%====================================================================================================================================
+%====================================================================================================================================
+\chapter{®elví grafika}
+	\label{cha:zelva}
+Krátce po ustanovení Chomského gramatik zaèaly vznikat rùzné návrhy pro práci s grafikou. Prvotní výzkum se vìnoval rozeznávání obrazu - symboly zde reprezentovaly grafická primitiva, napøíklad pøímky, zatáèky doleva a doprava, vìtve atp. Blí¾e je tato historie popsána v \cite{turtle}. Poté se výzkum pøesunul do oblasti generování obrazu a modelù a vznik koncept \emph{chain coding} \cite{webChain}, popisující pohyb v prostoru pomocí møí¾ky. Prusinkiewicz po zveøejnìní konceptu L-systémù zkoumal mo¾nosti jejich propojení s ¾elví grafikou \cite{turtle}, která by umo¾nila generovat obrázky, které nejsou omezovány møí¾kou (uva¾ovalo se primárnì o dvourozmìrném prostoru).
+	
+V ¾elví grafice se symboly vygenerovaného øetìzce chápou jako pøíkazy øídící ¾elvu, která nemá ponìtí o výsledném obraze. Laická pøedstava ¾elvy je na obrázku \ref{fig:zelva}. Formální definice, která je pøevzata z \cite{beauty}, je následující:
+
+\begin{definition}
+\textbf{¾elví grafika} \newline
+\emph{®elva} ve 2D prostoru je uspoøádaná trojice $ (x,y,\alpha) $, kde \emph{x} a \emph{y} jsou souøadnice pozice ¾elvy v prostoru a $\alpha$ je úhel natoèení - smìr kam ¾elva kráèí. Základní smìr $\alpha = 0^{\circ}$ je osa X, tzn. ve 2D prostoru obrázku smìr doprava, a kladný úhel je proti smìru hodinových ruèièek. Pro pohyb ¾elvy slou¾í velikost kroku ¾elvy \emph{d} a velikost zmìny úhlu $\delta$.
+\end{definition}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth - 2cm}{!}{
+	\begin{tabular}{|c|m{10cm}|}
+	\hline
+	symbol & pøíkaz \\ \hline
+	\hline
+	\emph{F} & Udìlej krok o velikosti \emph{d} ve smìru $ \alpha $. Stav ¾elvy se zmìní na $ (x',y',\alpha) $, kde $ x' = x + d\cos\alpha $ a $ y' = y + d\sin\alpha $. Nakresli èáru mezi $ (x,y) $ a $ (x',y') $. \\ \hline
+	\emph{f} & Udìlej krok o velikosti \emph{d} ve smìru $ \alpha $ bez kreslení èáry. \\ \hline
+	\emph{+} & Otoè se o úhel $ \delta $ doleva. Dal¹í stav ¾elvy je $ (x,y,\alpha+\delta) $. \\  \hline
+	\emph{-} & Otoè se o úhel $ \delta $ doprava. Dal¹í stav ¾elvy je $ (x,y,\alpha-\delta) $. \\ \hline
+	ostatní & Nedìlej nic. \\ \hline
+	\end{tabular}
+	}
+\caption{Základní pøíkazy ¾elví grafiky z \cite{beauty}.}
+\label{tab:zelviPrikazy}
+\end{table}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,keepaspectratio=true]{fig/zelva_ukazka.pdf}
+\caption{Reprezentace ¾elvy. Pøevzato a dodateènì upraveno z \cite{webTurtleSide} a \cite{webTurtleTop}.}
+\label{fig:zelva}
+\end{figure}
+
+V tabulce \ref{tab:zelviPrikazy} jsou uvedeny pøíkazy, které teï doká¾e ¾elva zpracovat. Tyto pøíkazy se v naprosté vìt¹inì publikací shodují a dají se pova¾ovat za standardní. Kromì nich se pou¾ívají je¹tì dal¹í, které budu definovat v dal¹ích podkapitolách. V poslední øadì je mo¾no zavést pøíkazy napøíklad pro zmìnu barvy, otoèení ¾elvy dozadu a dal¹í, které se li¹í pøípad od pøípadu a je nutné definovat je a¾ u konkrétní implementace.
+
+\begin{example}
+\label{exa:kochstar}
+Se souèasnými informacemi mohu definovat Kochovu vloèku z obrázku \ref{fig:kochVlocka} znovu pomocí OL-systémù se symboly a ¾elví grafiky. OL-systém je uveden na následujících rovnicích. Axiom vykreslí poèáteèní trojúhelník. Pøi nìkolika prvních derivacích je vidìt, ¾e vloèka se velice rychle zvìt¹uje - to je zpùsobeno konstantním parametrem \emph{d}. Konstantních rozmìrù lze dosáhnout zmen¹ováním \emph{d} po ka¾dé derivaci na $ 1/3 $. Ukázka je uvedena v tabulce \ref{tab:koch}.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ F++F++F $} \\
+$ p $ & : & $ F $ & $ \rightarrow $ & $ F-F++F-F $ \\
+&&&&\\
+$ d $ & $ = $ & \multicolumn{3}{l}{$ 1 $} \\
+$ \delta $ & $ = $ & \multicolumn{3}{l}{$ 60^{\circ} $}
+\end{tabular}
+\end{center}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|m{2cm}|m{8cm}|M|}
+\hline	
+axiom \hspace{1cm}$ d = 1 $& $ F++F++F $ & \includegraphics[width=2.3cm]{fig/dev0koch.pdf} \\ \hline
+1.derivace $ d = 1/3 $& $ F-F++F-F++F-F++F-F++F-F++F-F $ & \includegraphics[width=2.3cm]{fig/dev1koch.pdf} \\ \hline
+2.derivace $ d = 1/6 $& $ F-F++F-F-F-F++F-F++F-F++F-F-F-F++F-F++F-F++F-F-F-F++F-F++F-F++F-F-F-F++F-F++F-F++F-F-F-F++F-F++F-F++F-F-F-F++F-F $ & \includegraphics[width=2.3cm]{fig/dev2koch.pdf} \\ \hline
+\end{tabular}
+\caption{Kochova vloèka s ¾elví grafikou}
+\label{tab:koch}
+\end{table}
+
+\end{example}
+
+Dal¹ím pøíkladem zde je Sierpiñského\footnote{Wac³aw Sierpiñski (1882 - 1969) polský matematik} trojúhelník ve dvou variantách. Oba modely zavádí indexování symbolu F. V¹echny F bez ohledu na index znamenají posun ¾elvy dopøedu a nakreslení èáry. Indexy rozli¹ují jednotlivé symboly pro pravidla, která jsou pro ka¾dý symbol jiná. Pro dosa¾ení stejného efektu by ¹lo pou¾ít nìkolik rùzných písmen s významem písmene \emph{F} pro rozli¹ení pravidel.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{fig/sierpinski_beauty.pdf}
+\caption{Model Sierpinského trojúhelníku z \cite{beauty}. L-systém je uveden v pøíkladu \ref{exa:sierpinskiBeauty}.}
+\label{fig:sierpinskiBeauty}
+\end{figure}
+\begin{example}
+\label{exa:sierpinskiBeauty}
+První varianta je pøevzata z \cite{beauty} a má následující L-systém. Nìkolik prvních derivací je na obrázku \ref{fig:sierpinskiBeauty}.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ F_{l} $} \\
+$ p_1 $ &: & $ F_{r} $ & $ \rightarrow $ & $ F_{r}-F_{l}-F_{r}+F_{l}+F_{r}+F_{l}+F_{r}-F_{l}-F_{r} $ \\
+$ p_2 $ &: & $ F_{l} $ & $ \rightarrow $ & $ F_{l}+F_{r}+F_{l}-F_{r}-F_{l}-F_{r}-F_{l}+F_{r}+F_{l} $ \\
+&&&&\\
+$ \delta $ & $ = $ & \multicolumn{3}{l}{$ 60^{\circ} $}
+\end{tabular}
+\end{center}
+\end{example}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{fig/sierpinski_other.pdf}
+\caption{Dal¹í model Sierpinského trojúhelníku. Viz. pøíklad \ref{exa:sierpinski}.}
+\label{fig:sierpinski}
+\end{figure}
+\begin{example}
+\label{exa:sierpinski}
+Druhá varianta Sierpinského trojúhelníku, tentokrát s pøesnými trojúhelníky. První derivace jsou na obrázku \ref{fig:sierpinski}.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ F_{c}-F-F $} \\
+$ p_1 $ &: & $ F_{c} $ & $ \rightarrow $ & $ F_{c}-F+F_{c}+F-F_{c} $ \\
+$ p_2 $ &: & $ F $ & $ \rightarrow $ & $ FF $ \\
+&&&&\\
+$ \delta $ & $ = $ & \multicolumn{3}{l}{$ 120^{\circ} $}
+\end{tabular}
+\end{center}
+\end{example}
+
+Existuje mnoho variant L-systémù, ale naprostá vìt¹ina z nich nemá na následnou interpretaci øetìzce pomocí ¾elví grafiky ¾ádný vliv. Jednou z výjimek jsou parametrické systémy. U nich není potøeba zavádìt standardní délku kroku a otoèení, proto¾e tyto hodnoty si ka¾dý symbol nese sám, ve svých parametrech. V tabulce \ref{tab:zelviPrikazyParam} je uvedeno nìkolik symbolù s parametry a jak se interpretují. V této práci jsem pøevzal interpretaci z \cite{beauty}.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth - 2cm}{!}{
+	\begin{tabular}{|c|m{10cm}|}
+	\hline
+	symbol & pøíkaz \\ \hline
+	\hline
+	\emph{F}(\emph{a}) & Udìlej krok o velikosti \emph{a} ve smìru $ \alpha $, podobnì jako u \emph{F} bez parametru. \\ \hline
+	\emph{f}(\emph{a}) & Udìlej krok o velikosti \emph{a} ve smìru $ \alpha $ bez kreslení èáry, tak jako u \emph{f} bez parametru. \\ \hline
+	\emph{+}(\emph{a}) & Otoè se o úhel $ \delta $. Pokud je úhel kladný ¾elva zatáèí doleva, pøi záporném úhlu doprava. \\  \hline
+	\end{tabular}
+	}
+\caption{Pøíkazy ¾elví grafiky parametrického L-systému.}
+\label{tab:zelviPrikazyParam}
+\end{table}
+ 
+Zápis u parametrických systémù není pro pochopení sémantiky moc vhodný, a proto je potøeba specifikovat, který parametr u symbolu slou¾í po pohyb a jak ostatní vykládat, na vhodném místì u systému.
+
+U symbolu \emph{+} je dùle¾ité upozornit, ¾e ho budu pou¾ívat nejen jako symbol abecedy systému, ale také jako aritmetický operátor a jeho význam bude zále¾et na kontextu. Toto bude platit i u nìkterých dále pøedstavených symbolù, zejména u interpretace ve 3D.
+
+\section{Vìtvení - Závorkové systémy}
+	\label{sec:vetveni}
+
+Do této chvíle ¾elva umí vytváøet velké mno¾ství objektù, rùznì tvarovaných a s nìkterými èástmi neviditelnými, ale poøád jsou v¹echny modely tvoøeny jednou èarou. Mezi rostlinami je ale nejroz¹íøenìj¹ím tvarem strom s vìtvemi, a proto se studovaly mo¾nosti, jak vykreslovat stromové struktury. Reprezentace stromù má ve výpoèetní technice více podob a jednou z nich, která se ujala pro L-systémy jsou závorkové struktury. Ty jsou roz¹íøení ¾elví grafiky a její interpretace øetìzcù L-systémù.
+Lindemayer v \cite{beauty} zavádí dva nové symboly pro vytvoøení vìtve, které jsou uvedeny v tabulce \ref{tab:prikazyVetveni}.
+\begin{figure}
+\centering
+\includegraphics{fig/zavorky.pdf}
+\caption{Øetìzec se závorkami a jeho interpretace ve formì stromu.}
+\label{fig:tree}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{fig/kere.pdf}
+\caption{Modely interpretovaných øetìzcù se závorkami z pøíkladù \ref{exa:ker1} a \ref{exa:ker2}.}
+\label{fig:kere}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth - 2cm}{!}{
+	\begin{tabular}{|c|m{10cm}|}
+	\hline
+	symbol & pøíkaz \\ \hline
+	\hline
+	[ & Ulo¾ souèasný stav ¾elvy na zásobník. K ulo¾eným informacím patøí pozice a orientace ¾elvy, a kromì toho dal¹í vlastnosti napø. barva, kterou se kreslí, a ¹íøka èáry.\\ \hline
+	] & Vyjmi ze zásobníku stav ¾elvy a ten se stane aktuálním stavem. Nekresli ¾ádnou èáru, i kdy¾ se mìní pozice ¾elvy. \\ \hline	
+	\end{tabular}
+}
+\caption{®elví pøíkazy pro vytváøení vìtví.}
+\label{tab:prikazyVetveni}
+\end{table}
+
+Jak je vidìt z popisu symbolù, zavádí se objekt zásobníku, který je naprosto standardní LIFO fronta. Derivace závorkových systémù probíhají stejnì jako u OL-systémù. V drtivé vìt¹inì pøípadù neexistují pravidla se závorkami na levé stranì, tak¾e se pou¾ívá identické pravidlo. Jak vypadá øetìze se závorkami a vytvoøený strom je na obrázku \ref{fig:tree}.
+
+Následuje nìkolik pøíkladù pøevzatých z \cite{beauty}. Na obrázcích, na které pøíklady odkazují je promìnná \emph{n}, která urèuje poèet derivací, které probìhly.
+%Øetìzce pro vykreslení takových modelù jsou velmi dlouhé, a proto je zde nebudu uvádìt.
+
+\begin{example}
+\label{exa:ker1}
+Stromová struktura vygenerovaná následujícím systémem je na obrázku \ref{fig:kere} v èásti A. Vyobrazena je pátá derivace axiomu.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ F $} \\
+$ p_1 $ &: & $ F $ & $ \rightarrow $ & $ F[+F]F[-F][F] $ \\
+&&&&\\
+$ \delta $ & $ = $ & \multicolumn{3}{l}{$ 20^{\circ} $}
+\end{tabular}
+\end{center}
+\end{example}
+
+\begin{example}
+\label{exa:ker2}
+Dal¹í ukázka systému dvourozmìrného stromu, tentokrát s dvìma pravidly. Výsledný model je na obrázku \ref{fig:kere} v èásti B a v páté derivaci.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ X $} \\
+$ p_1 $ &: & $ X $ & $ \rightarrow $ & $ F[+X][-X]FX $ \\
+$ p_1 $ &: & $ F $ & $ \rightarrow $ & $ FF $ \\
+&&&&\\
+$ \delta $ & $ = $ & \multicolumn{3}{l}{$ 25,7^{\circ} $}
+\end{tabular}
+\end{center}
+\end{example}
+
+\section{®elví grafika ve 3D}
+	\label{sec:3Dzelva}
+
+Reálné modely bývají ve trojrozmìrném prostoru a 2D ¾elví grafika je pro nì nepou¾itelná, lze ji ov¹em roz¹íøit do 3D. Jak je uvedeno v \cite{beauty} základním konceptem je reprezentace aktuálního smìru ¾elvy, ne jedním, ale tøemi vektory $\vec{H},\vec{L},\vec{U}$, které postupnì znamenají smìr ¾elvy vpøed, písmeno vektoru je z anglického \emph{heading}, smìr doleva (písmeno ze slova \emph{left}) a nahoru (\emph{up}). Tyto vektory jsou jednotkové, vzájemnì kolmé a platí u nich rovnice vektorového souèinu $\vec{H} \times \vec{L} = \vec{U}$. Ukázka tìchto vektorù je na obrázku \ref{fig:vektory}.
+
+\begin{figure}
+\centering
+\includegraphics{fig/vektory.pdf}
+\caption{Orientace ¾elvy ve tøech dimenzích.}
+\label{fig:vektory}
+\end{figure}
+
+Rotace ¾elvy tedy mohou probíhat kolem ka¾dého vektoru a matematicky jsou vyjádøeny rovnicí
+\begin{equation*}
+\begin{bmatrix} \vec{H'} & \vec{L'} & \vec{U'} \end{bmatrix} = \begin{bmatrix} \vec{H} & \vec{L} & \vec{U} \end{bmatrix} R,
+\end{equation*}
+kde $ R $ je $ 3 \times 3 $ rotaèní matice. Pro pou¾ití této matice je potøeba znát úhel otoèení, který mù¾e být definován v zadání nebo jako parametr symbolu, a kolem kterého vektoru se ¾elva otáèí. Konkrétnì pro úhel $ \alpha $ se postupnì pro vektory $\vec{H},\vec{L}$ a $\vec{U}$ pou¾ijí tyto matice:
+
+\begin{eqnarray*}
+R_U(\alpha) &=& \begin{bmatrix}
+\cos \alpha & \sin \alpha & 0 \\
+- \sin \alpha & \cos \alpha & 0 \\
+0 & 0 & 1
+\end{bmatrix} \\
+\\
+\\
+R_L(\alpha) &=& \begin{bmatrix}
+\cos \alpha & 0 & - \sin \alpha \\
+0 & 1 & 0 \\
+\sin \alpha & 0 & \cos \alpha
+\end{bmatrix} \\
+\\
+\\
+R_H(\alpha) &=& \begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos \alpha & - \sin \alpha \\
+0 & \sin \alpha & \cos \alpha
+\end{bmatrix}
+\\
+\end{eqnarray*}
+
+Pro pou¾ití tìchto rotací se v \cite{beauty} zavádí interpretace skupiny symbolù uvedených v tabulce \ref{tab:zelviPrikazy3D}. Jejich prostorové uspoøádání je na obrázku \ref{fig:vektory}.
+
+Je vidìt, ¾e v¾dy dva symboly jsou kolem stejné osy, pouze na opaènou stranu. Dva symboly místo záporných èísel se pou¾ívají kvùli danému kroku, který nelze mìnit. Poslední lichý symbol svislé èáry se nepou¾ívá moc èasto, proto¾e na principu vracení se na pozici fungují hranaté závorky, viz. \ref{tab:prikazyVetveni}.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth - 2cm}{!}{
+	\begin{tabular}{|c|p{10cm}|}
+	\hline
+	symbol & pøíkaz \\ \hline
+	\hline
+	+ & Otoè se doleva o úhel $ \delta $, s pou¾itím matice $ R_U(\delta) $. \\ \hline
+	- & Otoè se doprava o úhel $ \delta $, s pou¾itím matice $ R_U(-\delta) $. \\ \hline
+	\&& Skloò se o úhel $ \delta $, s pou¾itím matice $ R_L(\delta) $. \\  \hline
+	$ \wedge $ & Zvedni hlavu o úhel $ \delta $, s pou¾itím matice $ R_L(-\delta) $. \\ \hline
+	$ \backslash $ & Pøeval se doleva o úhel $ \delta $, s pou¾itím matice $ R_H(\delta) $. \\ \hline
+	/ &  Pøeval se doprava o úhel $ \delta $, s pou¾itím matice $ R_H(-\delta) $.\\ \hline
+	$ | $ & Otoè se èelem vzad s pou¾itím matice $ R_U(180^{\circ}) $. \\ \hline
+	\end{tabular}
+	}
+\caption{Pøíkazy rotace ¾elvy ve 3D.}
+\label{tab:zelviPrikazy3D}
+\end{table}
+
+\section{Vykreslování ploch, barvy a dal¹í pøíkazy}
+	\label{sec:plochyAbarvy}
+
+Jedním z posledních prvkù modelu rostliny je tvorba listù a okvìtí. Vìtve a ostatní prvky je mo¾no tvoøit køivkami o rùzné tlou¹»ce, ale na listy je potøeba vytvoøit plochu. Existuje nìkolik mo¾ností jak specifikovat povrch nebo mnohoúhelník.
+
+\begin{figure}
+\centering
+\includegraphics[height=200pt]{fig/list.pdf}
+\caption{Vykreslení mnohoúhelníku s interpretací nových symbolù.}
+\label{fig:list}
+\end{figure}
+
+První mo¾ností je pøeddefinovat objekt listu a pøi interpretaci øetìzce u pøíslu¹ného symbolu, v \cite{beauty} za tento symbol pova¾ují $ \sim $, vlo¾it tento objekt do modelu. Pro urèení pozice modelu jsou potøeba dva vektory, které jsou pøevzaty z orientace ¾elvy, a pozice ¾elvy, která urèuje poèáteèní bod. Tento princip umo¾òuje vytváøet velmi krásné modely, ale poru¹uje elegantnost L-systémù, proto¾e je potøeba pøipravovat jednotlivé objekty, které se budou vkládat. Pøeddefinované objekty se také nemìní pøi derivacích a není tak mo¾né modelovat rùst rostliny. Tento princip nebudu pou¾ívat, proto¾e existují vhodnìj¹í metody.
+
+Dal¹í mo¾ností je specifikovat vrcholy mnohoúhelníku a poté vykreslit celou jeho plochu. Tento pøístup je slo¾itìj¹í, ale odstraòuje nedostatky pøedchozího, za cenu ménì komplexních tvarù. V \cite{beauty} autoøi zavádìjí nìkolik symbolù, které uvedu i zde. Symbol { znamená poèátek kreslení nového polygonu. Pokud se u¾ nìjaký mnohoúhelník vytváøel, ulo¾í se na jejich zásobník (nemá nic spoleèného se zásobníkem stavù ¾elvy). Dal¹í symbol $ (.) $ si zapamatuje polohu ¾elvy jako jeden z vrcholù souèasného polygonu. Závìreèným symbolem je }, který ukonèí tvorbu mnohoúhelníku, vytvoøí ho ze v¹ech dosud pøijatých vrcholù, a pokud je nìjaký polygon na zásobníku, tak ho vyjme. Doplòkovým symbolem je zde $ G $. Ten umo¾òuje kreslit dovnitø polygonu, jeho interpretace je stejná jako $ F $ vnì tvorby mnohoúhelníku. Pøíkazy z této èásti kapitoly jsou pøehlednì uvedeny v tabulce \ref{tab:zelviPrikazyOstatni}. Ukázkový polygon i s  interpretovaným øetìzcem je na obrázku \ref{fig:list}.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth - 2cm}{!}{
+	\begin{tabular}{|c|p{10cm}|}
+	\hline
+	symbol & pøíkaz \\ \hline
+	\hline
+	\{ & Zaèni vytváøet polygon. \\ \hline
+	.  & Ulo¾ polohu ¾elvy jako vrchol polygonu. \\  \hline
+	G  & Posuò ¾elvu a vykresli èáru dovnitø polygonu. \\  \hline
+	\} & Ukonèi vytváøení polygonu a vykresli ho. \\ \hline
+	$ \sim $ & Vlo¾ do modelu pøeddefinovaný tvar. \\  \hline
+	!  & Zmen¹i prùmìr dal¹ích segmentù. \\  \hline
+	\%  & Odøízni zbytek aktuální vìtve. \\  \hline
+	'  & Inkrementuj index barvy o jednu polo¾ku. \\  \hline
+	,  & Dekrementuj index barvy o jednu polo¾ku. \\  \hline
+	\end{tabular}
+	}
+\caption{Pøíkazy pro tvorbu polygonù, barev a dal¹í ménì pou¾ívané.}
+\label{tab:zelviPrikazyOstatni}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[height=150pt]{fig/barvy.pdf}
+\caption{Prostor vyplòující køivka s barevným zvýraznìním cesty.}
+\label{fig:barvy}
+\end{figure}
+
+Mezi speciální symboly patøí \emph{!}, který zmen¹uje prùmìr jednotlivých segmentù rostliny o koeficient $ w_r = 0,707 $. To umo¾òuje vytváøet realistické stromy, proto¾e s touto konstantou platí postulát Leonarda da Vinciho o tlou¹»ce vìtví a kmene. Více informací je v \cite[strana 57]{beauty}. Symbol \emph{\%} je mo¾no pou¾ívat pøi simulaci odpadávání kvìtù a listù. V systému se odøízne zbytek vìtve vytváøející okvìtní lístek v momentu rozvoje plodu.
+
+Posledním prvkem je zde zavedení barev do modelu. Aktuální barva, kterou ¾elva kreslí, musí být zahrnuta do stavu ¾elvy a její reprezentace musí být i v samotném øetìzci, který se interpretuje. Zde je ov¹em problém reprezentace spojité palety barev v diskrétním svìtì symbolù. Pøi pou¾ití parametrických systémù je øe¹ení velmi jednoduché - zavedením symbolu $ C(r,g,b) $ s tøemi parametry, který nastaví souèasné barvì kanály $ (r,g,b) $. V ostatních L-systémech je to problém komplikovanìj¹í a existuje zde nìkolik pøístupù.
+
+Jedním z pøístupù je mít pøeddefinovanou paletu barev seøazenou v seznamu nebo nìjakém poli. Do tohoto pole existuje index, který urèuje èím se bude vykreslovat aktuální prvek. Pro manipulaci s indexem se zde zavádí nový symbol \emph{'}, který znamená posun indexu o jednu polo¾ku doprava\footnote{Zde zále¾í na tom jak je pole barev definováno. Je mo¾no se posunout doprava nebo dolù, dùle¾ité je, ¾e index má o 1 vy¹¹í hodnotu ne¾ pøedtím.}. Tak je to zavedeno v \cite{beauty}. Já sám jsem pro vìt¹í variabilitu zavedl i opaèný symbol (\emph{,}), který posouvá index doleva. Tento zpùsob práce s barvami není moc vhodný pøi tvorbì rostlin, ale hodí se pøi práci s plochu vyplòujícími køivkami (viz. \cite{krivky}). Seznam barev je zaveden jako cyklický a postupnì se mezi segmenty modelu mìní barva a lze díky tomu vidìt kudy køivka prochází. Viz. obrázek \ref{fig:barvy}.
+
+ V \cite{colors} je tento princip roz¹íøen o parametr symbolù \emph{'} a (\emph{,}), kterým je následujících nìkolik symbolù. Za parametr se zde pokládají èíslice, které urèují o kolik polo¾ek se má pøesunout index doleva nebo doprava. Také zde zavádí symbol $ c $. Ten funguje pouze s parametrem a pøesune index na hodnotu rovnou parametru. Toto roz¹íøení zjednodu¹uje urèité aspekty práce s L-systémy, ale poru¹uje nezávislost základního stavebního bloku - jednoho symbolu, a proto ho nebudu pou¾ívat.
+
+\section{Zpracování kontextu pøi modelování rostlin}
+	\label{sec:zelvikontext}
+	
+Pøi zkoumání interpretace kontextových L-systémù ¾elví grafikou se pøi¹lo na nìkolik problémù v rozdílech mezi reprezentací øetìzcem a modely (vìt¹inou rostlin). Jedním je zaøazování do kontextu takových symbolù, které mají význam jen pøi vykreslování modelu, ale v samotném významu kontextu hrají velmi malou roli. Druhým problémem jsou závorkové struktury a vìtvení - v takových modelech mohou mít segmenty více kontextù, které nejsou souvisle za sebou v øetìzci. Tyto situace jsou popsány v \cite[strany 31 a 32]{beauty}.
+
+Zpracováním kontextového systému, ve kterém se mohou v kontextu vyskytovat v¹echny symboly abecedy, je mo¾né dosáhnout jinak nepøístupných modelù, ale s pøihlédnutím k cílùm, realistického modelování rostlin, se zjistilo, ¾e tyto systémy nejsou potøeba. Základním pøíkladem kontextových systémù je propagace signálu rostlinou - z pohledu symbolù pak pohyb vykonává \emph{F} s urèitým indexem. Zde nastává problém, ¾e mezi jednotlivými \emph{F} jsou symboly pro rotaci ¾elvy jako je \emph{+} a \emph{-}. V naprosté vìt¹inì pøípadù nechceme odli¹it situace, kdy právì ¾elva zatoèila nebo ¹la kupøedu. Tento problém má jedno velmi jednoduché øe¹ení a tím je, ignorování urèitých symbolù z pohledu hledání kontextu u pravidel.
+
+\begin{example}
+\label{exa:ignorekont}
+Ukázka ignorování ne¾ádoucích symbolù. $ F_b $ zde oznaèuje segment u¾ dosa¾ený signálem a $ F_a $ naopak je¹tì nedosa¾ený. Direktiva \emph{\#ignore} pøevzatá z \cite{beauty} zaji¹»uje pøeskakování symbolù \emph{+} a \emph{-} pøi hledání kontextu.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{rcccccl}
+$ \#ignore $ &: & \multicolumn{5}{l}{$ +- $} \\
+&&&&&&\\
+$ \omega $ &: & \multicolumn{5}{l}{$ F_b+F_a-F_a--F_a+F_a+F_a-F_a $} \\
+$ p_1 $ &: & $ F_b $ & $ < $ & $ F_a $ & $ \rightarrow $ & $ F_b $
+\end{tabular}
+\end{center}
+\end{example}
+	
+V rámci stromových modelù dostává kontext úplnì nový rozmìr, kdy jeden segment mù¾e mít více kontextù a ty nemusí být sekvenènì za sebou v interpretovaném øetìzci. Lindenmayer a Prusinkiewicz\cite{beauty} za pravý kontext (následující za segmentem) pova¾ují v¹echny vìtve vyrùstající z segmentu a za levý kontext pouze èást modelu, ze které segment vyrùstá. Tyto principy umo¾òují modelovat propagaci dvou druhù signálù v rostlinách - od koøene k listùm, vyu¾ívající levý kontext, a od listù ke koøeni, vyu¾ívající pravý kontext. Oba jsou uvedeny na obrázku \ref{fig:konttree}.
+	
+\begin{figure}
+\centering
+\includegraphics{fig/zavorky_kontext.pdf}
+\caption{Kontext o délce 2 symbolù ve stromové struktuøe. Pøevzato z \cite{beauty}.}
+\label{fig:konttree}
+\end{figure}
+	
+Z pohledu øetìzcù se závorkami je situace mnohem více komplikovanìj¹í. Strom z obrázku \ref{fig:konttree} mù¾eme reprezentovat jako
+\begin{equation*}
+ABC[DE][SG[HI[J]K]L[M]NO].
+\end{equation*}
+
+Pøi zpracování samotné symboly \emph{[} a \emph{]} øadíme mezi ignorované, které ov¹em musíme poèítat, abychom se dostali ke správným vìtvím. Pøi hledání prvních dvou symbolù levého kontextu pro symbol \emph{S} potøebujeme pøeskoèit celou vìtev \emph{[DE]}, která je ukonèena pøed symbolem a dostaneme se k \emph{B} a \emph{C}. Pravý kontext, velikost dva symboly, je je¹tì o nìco slo¾itìj¹í, proto¾e mù¾e mít více podob. Nejprve se dostaneme k symbolu \emph{G}, který bude souèástí ka¾dého kontextu a poté k vìtvi se symbolem \emph{H}. To ov¹em není v¹e, je nutné zbytek vìtve pøeskoèit a hledat dal¹í vìtev - ta zaèíná symbolem \emph{L}. Nalezli jsme dva kontexty - \emph{GH} a \emph{GL}. Hledání pravého kontextu mù¾e být uzavøeno koncem aktuální vìtve pùvodního symbolu pøed dosa¾ením po¾adovaného poètu symbolù.
+
+U zpracování kontextu velmi zále¾í na mno¾inì znakù, která se má ignorovat a vìt¹inou je potøeba, aby tvùrce systému specifikoval, které znaky se mají v kontextu zpracovávat. Napøíklad u abecedy, kterou definuji v této práci, pøeskakování rotaèních symbolù, je po¾adováno skoro v¾dy, ale symbol \emph{\{} pro vytvoøení polygonu, nìkdy chceme detekovat a nìkdy ne. Proto neurèuji skupinu ignorovaných znakù a je ji potøeba poka¾dé znovu definovat i za cenu nekonzistence s pùvodní definicí, tak jako v \cite{beauty}.
+
+%====================================================================================================================================
+%====================================================================================================================================
+%====================================================================================================================================
+\chapter{Vykreslování 3D objektù}
+	\label{cha:vykreslovani}
+	
+Rozvoj trojrozmìrné poèítaèové grafiky zapoèal v ¹edesátých letech na více místech souèasnì, pøevá¾nì ale v USA. Dùle¾itými výzkumnými místy podle \cite{historiegrafiky} byly MIT, Bellovy laboratoøe a hlavnì University of Utah. Zde objevili základní principy a algoritmy pou¾ívané v 3D grafice, mezi které patøí renderování, mapování textur, stínování objektù a mnoho dal¹ích. Na tìchto základech stojí souèasná 3D grafika a jsou popsány v následujícím odstavci.
+
+Dvì hlavní èásti 3D grafiky jsou vytváøení modelu a jeho reprezentace a pøevod 3D modelu do 2D zobrazení, vìt¹inou na obrazovce. Reprezentovat model lze velkým mno¾stvím metod, napøíklad pomocí \emph{konstruktivní geometrie}, kdy model reprezentujeme stromem grafických primitiv, která kombinujeme. Dal¹í metodou je \emph{dekompozice} modelu na objemové jednotky - voxely, které mají vlastnosti objektu v daném místì. Velmi oblíbenými jsou také metody popisující hranice modelu pomocí 2D tvarù, napøíklad trojúhelníkù nebo rùzných mo¾ností popisu 3D ploch. Druhá èást, zabývající se vykreslením tìchto objektù na prùmìtnu, nazývaná renderování, je také velmi komplexní, proto¾e se usiluje o co nejrealistiètìj¹í obrazy. Mezi základní problémy zde patøí zabránìní aliasu - \emph{antialiasing}, který vzniká pøi pøevodu spojité informace na diskrétní, metody \emph{stínování objektù} - vybarvení èásti objektu odstínem barvy pro iluzi trojrozmìrnosti, \emph{texturování} - pokrytí povrchu modelu obrázkem nebo vzorkem. Dále mnoho rùzných metod \emph{osvìtlení} scény a \emph{vrhání stínu} objektù. Tyto pojmy jsou spoleènì s mnoha dal¹ími popsány v \cite{modernigraf}. Je zde také matematické pozadí, jak tyto principy fungují, které jsem pou¾il pøi programování generátoru L-systémù.
+
+Pøi pùvodních výzkumech probíhaly grafické výpoèty na procesoru spoleènì s ostatními, ale záhy se zaèaly vyu¾ívat grafické akcelerátory a GPU\footnote{Graphical processing unit - grafický procesor.}, které se specializují na vytváøení obrazu na monitoru a grafické operace. Pou¾ití specializovaného hardwaru pro vykreslování umo¾nilo masivní navý¹ení výkonu a uvolnìní procesoru. V souèasnosti zaèínají být samostatné grafické karty na základní desce vytlaèovány øe¹eními se spoleèným GPU a procesorem v jednom pouzdru.
+
+Komunikace s grafickou kartou je z programátorského hlediska zaji¹tìna aplikaèní knihovnou (v angliètinì se oznaèuje termínem API), která zpracovává jednotlivá volání a smazává rozdíly mezi jednotlivými modely akcelerátorù. Ke dvìma nejpou¾ívanìj¹ím a nejznámìj¹ím knihovnám patøí OpenGL\cite{opengl} a Direct3D\cite{direct3d}, které dále v této kapitole popí¹u (èásti \ref{sec:opengl} a \ref{sec:direct3d}). Dále existují i jejich nástavby, které umo¾òují pou¾ití tìchto knihoven v dal¹ích programovacích jazycích. Proto¾e jsem se rozhodl naprogramovat aplikaci pro L-systémy v Javì, zmíním v \ref{sec:openglJava} nìkolik grafických knihoven pro tento programovací jazyk.
+	
+\section{OpenGL}
+	\label{sec:opengl}
+	 
+\begin{figure}
+\centering
+\includegraphics{fig/opengl_logo.pdf}
+\caption{Logo OpenGL.}
+\label{fig:opengllogo}
+\end{figure}
+	 
+OpenGL\cite{openglweb} bylo na poèátku vyvinuto firmou SGI a v souèasné dobì jej spravuje ARB\footnote{ARB -  Architecture Review Board.} - konsorcium, jeho¾ èleny jsou významní hráèi na poli grafiky (nVidia, SGI, \dots). Jde o nepou¾ívanìj¹í specifikaci API pro grafiku a jeho implementace existují pro skoro v¹echny platformy pracující s grafikou. Jak bylo uvedeno vý¹e, OpenGL ulehèuje programátorovi èinnost, proto¾e nemusí rozli¹ovat jednotlivé modely grafických karet a je mu pøístupný jejich výkon. V krajním pøípadì, kdy není v systému nìjaký grafický akcelerátor obsa¾en, knihovna pou¾ije implementaci v softwaru a nic kritického se nestane.
+ 
+Knihovna byla navr¾ena jako nezávislá, proto neobsahuje ¾ádné funkce pro vytváøení a práci s okny ani zpracování událostí. Pro tyto èinnosti je nutné pou¾ít dal¹í nástroje - souèástí OpenGL je proto knihovna GLUT, která tuto funkcionalitu umo¾òuje. V duchu multiplatformnosti OpenGL také zavádí vlastní základní datové typy, jako \emph{GLint} a \emph{GLfloat}.
+Standardní implementace knihovny je v jazyce C a základem je hlavièkový soubor pro C/C++. Existují ov¹em implementace pro velké mno¾ství dal¹ích jazykù - Python, Javu, Fortran, Lisp, atd. Tyto implementace vet¹inou obalují zdrojový soubor v C a zpøístupòují volání jeho funkcí. Nìkdy se tato implementace oznaèuje cizím slovem jako \emph{wrapper} z anglického pojmu pro obalovat nebo zabalovat.
+ 
+OpenGL je z pohledu programátora stavovým automatem, se svým stavem, a rozhraním knihovny je asi 200-250 funkcí, které tímto stavem manipulují a vytváøí interaktivní trojrozmìrné aplikace. Pøi zadávání pøíkazu tedy lze mìnit vlastnosti vykreslovaných objektù, jako je barva, prùhlednost, tlou¹»ka èáry, nebo celé scény - napøíklad osvìtlení a transformace modelu a pohledu. Pomocí OpenGL lze vytváøet modely slo¾ené ze základních geometrických útvarù neboli primitiv. Mezi nì patøí bod, úseèka, trojúhelník, ètyøúhelník, polygon, obrazy a dal¹í, v¹echny jsou uvedeny napø. v \cite{opengl} odkud jsem èerpal implementaèní detaily. V této knize je také popsaná struktura názvù funkcí a promìnných v OpenGL, která se skládá z nìkolika èástí. Bývá zde pøedpona \emph{gl} pro jádro OpenGL, samotný název funkce a poèet a druh parametrù. Pøíkladem mù¾e být \emph{glColor3f()}, funkce která mìní barvu vykreslovaných primitiv a pøijímá 3 parametry typu \emph{GLfloat}.
+
+Standardní souèástí ka¾dé implementace je knihovna utilit OpenGL nazývaná \emph{GLU}. Tato knihovna umo¾òuje popisovat modely metodami na vy¹¹í úrovni ne¾ samotné jádro. Pøíkladem mo¾ností mohou být NURBS\footnote{NURBS - Nonuniform Rational B-spline - neuniformní racionální b-splajn - velmi èasto pou¾ívaný popis køivek v poèítaèové grafice.} køivky a plochy nebo kvadratické povrchy. Funkce z této knihovny pou¾ívají pøedponu \emph{glu}, napøíklad jako funkce \emph{gluSphere()}, která vykreslí kouli. Mù¾eme ji pou¾ít jako doèasný model pøi vytváøení prostøedí pro samotnou práci.
+
+\section{Direct3D}
+	\label{sec:direct3d}
+
+\emph{Direct3D}\cite{direct3d} je rozhraní, které se specializuje na 3D grafiku v \emph{DirectX}\cite{directx}. DirectX je sada knihoven vyvíjená spoleèností Microsoft pro zjednodu¹ení pøístupu k grafickému hardwaru v ¹iroké paletì úloh. Knihovny fungují pouze v systému Windows - nepodporují ¾ádné jiné operaèní systémy a platformy. Lze ji v¹ak zprovoznit na unixových operaèních systémech pøes \emph{Wine}\cite{wine}. První verze API byla zveøejnìna v roce 1995 a v souèasnosti je aktuální verze 11.1 z srpna 2012.
+
+Souèástí DirectX je mnoho specializovaných knihoven, napø. pro práci s 2D a 3D grafikou, fonty, práci se zvuky, obecné výpoèty na grafické kartì a dal¹í. Direct3D je neznámìj¹í èástí a její jméno se èasto zamìòuje s DirectX pro oznaèení celé sady. Je nejznámìj¹í, proto¾e se pou¾ívá hlavnì pro poèítaèové hry a napøíklad také na u¾ivatelské rozhraní Windows Aero.
+
+Po implementaèní stránce je Direct3D podobné OpenGL. Modely jsou slo¾eny z stejných druhù grafických primitiv a probíhají stejné fáze pøi vykreslování. Proto¾e je Direct3D vyvíjen konkrétnì pro jeden operaèní systém, nabízí se fakt, ¾e je rychlej¹í ne¾ OpenGL, které musí podporovat mnoho platforem, co¾ ale nemusí být v¾dy pravda. V souèasnosti jsou hlavním rozdílem systémová volání Direct3D, která pøepínají do privilegovaného módu jádra. Tato akce spotøebovává vìt¹í mno¾ství procesorového èasu a ztrácí se výkon. Stejný problém je i v OpenGL, ale není tak markantní. Dal¹ím z rozdílù je, ¾e Direct3d pracuje s objektovì orientovaným rozhraním.	Tuto knihovnu je mo¾no pou¾ívat v jazyce C/C++ a pro dal¹í jazyky jsou k dispozici obalovací knihovny - wrappery.
+
+\section{3D grafika a Java}
+	\label{sec:openglJava}
+	
+Proto¾e je OpenGL pøi práci s grafikou takøka standardním nástrojem pro vìt¹inu platforem, témìø v¹echny øe¹ení práce s grafikou pro Javu pou¾ívají tuto knihovnu, více nebo ménì obalenou dal¹í funkcionalitou.
+
+Jednou z nejznámìj¹ích implementací je \emph{JOGL}, ta patøí mezi nízkoúrovòové knihovny témìø kopírující OpenGL. Je popsaná v èásti \ref{subsec:joglalwjgl} spoleènì s dal¹í knihovnou \emph{LWJGL}. Zástupcem vysokoúrovòových knihoven a prostøedí je \emph{jMonkeyEngine} v èástí \ref{subsec:jmonkey} nebo \emph{Java 3D}\cite{java3d}.
+
+Na pøelomu tisíciletí mezi nejpou¾ívanìj¹í vazby OpenGL patøila i knihovna \emph{GL4Java}\cite{gljava}, která byla pozdìji vytlaèena knihovnou JOGL pracující na stejných principech.
+
+\subsection{JOGL a LWJGL}
+	\label{subsec:joglalwjgl}
+	
+JOGL\cite{jogl} je velmi oblíbené navázání (neboli obalovací knihovna - wrapper) OpenGL na Javu, které se pou¾ívá chceme-li pracovat ve skoro èistém OpenGL, a zároveò mít pøístup k mo¾nostem Javy. V rámci Javy musí být model knihovny objektový, ale rozhraní je velice intuitivní, a proto není problém pro programátory døíve pracující s OpenGL velmi rychle zaèít pracovat s JOGL. Pøístup knihovny je tak podobný OpenGL, ¾e je mo¾né vyu¾ít knihy a dokumentaci pro jazyk C, jako napøíklad \cite{opengl}, kterou jsem pou¾il pøi implementaci. Základní OpenGL API pro C je zpøístupnìno pomocí JNI\footnote{JNI - Java Native Interface - framework umo¾òující aplikacím Javy pøístup ke knihovnám napsaným v jiných programovacích jazycích jako C a C++.} volání. JOGL umo¾òuje pøístup jak k jádru OpenGL - funkcím s pøedponou \emph{gl}, tak ke GLU knihovnì - pøedpona \emph{glu}.
+
+Knihovna byla vyvíjena skupinou ve firmì Sun Microsystems a pro prodeji firmy v roce 2009 je od roku 2010 vedena jako nezávislý projekt s BSD licencí. Podle \cite{jsr231} je JOGL referenèní implementací vazby OpenGL na Javu.
+
+JOGL má mnoho výhod, proto¾e je velká èást kódu generovaná automaticky z C, pomocí nástroje \emph{GlueGen}\cite{gluegen}, pøidávání zmìn v OpenGL do JOGL je velmi rychlé a kód má stejnou strukturu. Také je dùle¾ité, ¾e je to referenèní implementace, to zaji¹»uje, ¾e autoøi se sna¾í o urèitý standard. JOGL má rovnì¾ vazby na \emph{Swing} a \emph{AWT}, API Javy pro práci s okny, to velmi zjednodu¹uje práci pøi vytváøení aplikací.
+
+Tato knihovna se pou¾ívá napøíklad pro zobrazování grafù v programu \emph{Scilab} nebo v poèítaèových hrách jako je \emph{RuneScape}. Mu¾e být také pou¾ita v \emph{jMonkeyEnginu} a je pøítomna ve vysokoúrovòové knihovnì \emph{Java3D}.
+
+\emph{LWJGL} - Lightweight Java Game Library\cite{lwjgl} je dal¹í knihovna obalující OpenGL pro Javu, která jak u¾ název napovídá se hlavnì pou¾ívá pro vývoj her a je velmi podobná JOGL. Klade dùraz na jednoduché rozhraní, výkon a bezpeènost, proto¾e se pøedpokládá pou¾ití na velkém mno¾ství platforem. Knihovna umo¾òuje pracovat nejen s grafikou, ale i se zvukem, paralelními výpoèty a nejrùznìj¹ími herními ovladaèi - gamepady, volanty, atd. LWJGL pou¾ívá mnoho enginù, jako \emph{jMonkeyEngine}, kde je základním rendererem, a je souèástí velmi známé hry \mbox{\emph{Minecraft}}. Zatím poslední verze této knihovny je 2.8.5 z listopadu 2012.
+
+\subsection{jMonkey Engine}
+	\label{subsec:jmonkey}
+
+\emph{jMonkeyEngine}\cite{jmonkeyweb} je herní engine\footnote{Engine - systém pro tvorbu a vývoj aplikací, vìt¹inou her, pracující s grafikou.}, který umo¾òuje práci s 3D grafikou a vývoj aplikací. Byl vytvoøen aby odstranil absenci vývojových prostøedí pro práci s grafikou v Javì. Pro vykreslování na ni¾¹ích úrovních pou¾ívá LWJGL, ale je mo¾no vyu¾ít i JOGL. V souèasnosti se blí¾í vydání verze 3.0 jako stabilní, pøedpokládá se o ní, ¾e bude plnohodnotným prostøedím pro vývoj grafických aplikací.
+
+Samotný engine je skupina knihoven a samostatnì jde o nízkoúrovòový nástroj. Po jejich kombinaci s vývojovým prostøedím, oficiálním a doporuèovaným je \emph{jMonkeyEngine 3 SDK}, získáme vysokoúrovòový nástroj s rozsáhlou paletou mo¾ností pro práci s grafikou, nejen na úrovni zdrojového kódu, ale i s u¾ivatelským rozhraním. Kromì toho zde lze pracovat, podobnì jako u jiných nástrojù, s základní fyzikou a detekcí kolizí, multimédii, umìlou inteligencí, atd. Projekt je ¹íøen s BSD licencí a je mo¾né jej volnì vyu¾ívat.
+
+%====================================================================================================================================
+%====================================================================================================================================
+%====================================================================================================================================
+\chapter{Vytvoøená aplikace LModeler}
+	\label{cha:aplikace}
+
+Cílem tohoto projektu bylo vytvoøit program pro generování 3D modelù a v této kapitole popisuji mou aplikaci, pojmenovanou LModeler, zalo¾enou na teorii popsané v pøedchozích kapitolách \ref{cha:l-systemy} a \ref{cha:zelva}. Nejdøíve se v èásti vìnuji \ref{sec:uzivatel} grafickému rozhraní, vizualizaci modelu a s èím v¹ím se u¾ivatel mù¾e v programu setkat. Dále popisuji, z pohledu tvùrce a programátora, pou¾ité prostøedky pro vývoj a zdrojový kód - èást \ref{sec:vyvoj}.
+	
+\section{U¾ivatelská èást}
+	\label{sec:uzivatel}
+	
+Podle zadání bylo cílem vytvoøit interaktivní systém pro generování 3D objektù pomocí L-systémù a ¾elví grafiky, co¾ je velmi struèný popis, proto bylo potøeba nejprve specifikovat co budu vytváøet. Rozhodl jsem se, kromì základních OL-systémù podle definice \ref{def:olsystem}, také pou¾ít stochastické L-systémy ze stejné èásti podle definice \ref{def:stochLsys} a kontextové L-systémy z èásti \ref{subsec:ilsys}. Pøi zpracování stochastických systémù, se vybírá pro ka¾dý symbol jiné pravidlo, podle aktuálního rozlo¾ení pravdìpodobnosti.
+
+Z pohledu u¾ivatele je v¾dy ¾ádoucí, aby ovládání aplikace bylo maximálnì intuitivní. Proto jsem pou¾il jediný ¹iroce pou¾ívaný styl aplikace, který obsahuje menu v horní èásti okna, sloupec nebo li¹tu ovládacích prvkù a pracovní nebo vizualizaèní èást okna. Èastým po¾adavkem, který je velmi usnadòující, je mo¾nost pracovat paralelnì s více modely zároveò a proto bylo souèástí roz¹íøeného zadání pou¾ití zálo¾ek, které korespondují s intuitivním stylem aplikace. Hlavní okno aplikace je na obrázku \ref{fig:aplikace}. Jednotlivé èásti jsou barevnì odli¹eny, menu - oran¾ový obdélník, ovládací prvky - fialový a model v svìtle zeleném obdélníku. Zálo¾ky jsou v øádku pod menu a ka¾dá z nich má vlastní ovládací panel s aktuálními hodnotami a vizualizaci modelu.
+
+Souèástí menu jsou základní akce, které u¾ivatelé v menu oèekávají, jako je mo¾nost ukládat svou si tvorbu do souboru a naèítat ji a hlavnì je pøítomen manuál, s pøesným popisem akcí, které vyvolávají jednotlivé prvky rozhraní. Také jsem se rozhodl pøidat mo¾nost vyvolat ukázkové L-systémy, vyu¾ívající plnì mo¾nosti tohoto programu, které usnadní seznámení s aplikací.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth-20mm]{fig/aplikace.pdf}
+\caption{Hlavní okno aplikace.}
+\label{fig:aplikace}
+\end{figure}
+
+\subsection{Ovládání generátoru}
+
+Na obrázku \ref{fig:aplikace} jsou ve fialové èásti komponenty ovládající model oznaèeny èísly, pomocí kterých je budu popisovat. Prvek s èíslem \emph{2} slou¾í pro vstup axiomu L-systému a pod ním \emph{3} funguje jako vstup pravidel. Oba dva prvky jsou synchronní a je mo¾no je libovolnì upravovat. Svùj vstup pøedají pro generování a¾ pøi stisku tlaèítka oznaèeného èíslem \emph{4}. Komponenty \emph{2}, \emph{3} a \emph{4} staèí pro vytvoøení základních bezkontextových gramatik. Nepotøebuji zde celkovou abecedu symbolù, proto¾e za abecedu systému pova¾uji mno¾inu v¹ech mo¾ných znakù. Na symboly, které jsem v systému neoèekával, aplikuji pravidla jako na ka¾dé jiné, ale pøi interpretaci øetìzce je ignoruji. Lépe øeèeno jejich význam je takový, ¾e se nestane nic.
+
+Prvek \emph{1} je urèen k pou¾ití u kontextových systémù pro specifikaci symbolù, které se mají pøeskakovat pøi hledání kontextu v øetìzci. Funguje na stejném principu jako direktiva \emph{\#ignore}, z \cite{beauty}, kterou jsem popsal v \ref{sec:zelvikontext}. Tak jako prvky \emph{1} a \emph{2} je prvek \emph{1} synchronní s aktivací pøi stisku tlaèítka \emph{4}.
+
+V prvcích \emph{6},\emph{7} a \emph{8} lze nastavit úhel otoèení, který se vyu¾ívá pøi interpretaci symbolù rotace ¾elvy, poèáteèní polomìr kreslených segmentù a koeficient ze¹tíhlování segmentù u symbolu \emph{!}. Úhel se zadává ve stupních od 0$ ^{\circ} $ po 359$ ^{\circ} $ a má stejný význam jako v kapitole \ref{cha:zelva}. Polomìr segmentu lze zadat jako èíslo od 0 do 10, kde 1,0 je délka segmentu. Pøi polomìru 1 tedy bude segment dvakrát ¹ir¹í ne¾ del¹í. Koeficientem tlou¹»ky se násobí aktuální tlou¹»ka, tak¾e pøi velikosti od 0 do 1 bude model postupnì tenèí a pokud bude koeficient vìt¹í ne¾ 1, tak bude model tloustnout.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{fig/zakladni_barvy.pdf}
+\caption{\emph{Základní} barevná sada aplikace.}
+\label{fig:zakladnibarvy}
+\end{figure}
+
+Lze modelu také nastavit dvì barevná schémata/sady pomocí roletové nabídky prvku èíslo \emph{5}. \emph{Základní} sada obsahuje 11 základních barev, které by mìly staèit pro modely, které potøebují pro urèité èásti konkrétní barvy, jako jsou napøíklad rostliny - hnìdý kmen, zelené listy a bílé kvìty. \emph{Základní} barvy jsou na obrázku \ref{fig:zakladnibarvy}. Druhé schéma je \emph{roz¹íøená} sada. Ta obsahuje 500 barev v barevném spektru, které se postupnì mìní, tak jako v realitì od èervené, pøes zelenou a modrou, k fialové a cyklicky zpìt èervené. Nejpodobnìj¹í barvy jsou tedy u sebe nejblí¾e. Toto obarvení modelu se vyu¾ívá pøi modelování køivek pro zvýraznìní kudy køivka vede. Model s tímto principem jsem uvedl na obrázku \ref{fig:barvy}. \emph{Roz¹íøená} barevná sada, barevné spektrum, je na obrázku \ref{fig:rozsirenebarvy}.
+
+L-systémy pracují s úrovnìmi/derivacemi celého øetìzce, kde ka¾dý stupeò je souèástí simulace rùstu modelu. Prvek \emph{9} umo¾òuje nejprve nastavit, jaký stupeò derivace chce u¾ivatel vykreslit a po stisknutí tlaèítka, se tento stupeò vypoèítá a vymodeluje. Úroveò se poèítá od 0 do kladných èísel, kde 0 je zastoupena axiomem a dále znaèí kolik derivaèních krokù bylo na axiom aplikováno. Lze zobrazit libovolný kladný stupeò, je ale potøeba upozornit, ¾e z fraktálové podstaty L-systémù, jsou výpoèetní po¾adavky velmi èasovì nároèné, pøi velkém poètu derivací. Na druhou stranu, ze zku¹enosti jsem do¹el k faktu, ¾e krokování mezi derivacemi je èastým jevem, a proto jsem do ovládacího panelu doplnil tlaèítka pro jeden krok derivace. Prvek \emph{10a} po stisknutí umo¾ní jeden krok zpìt smìrem k axiomu, a prvek \emph{10b} provede jeden derivaèní krok nad aktuálním stavem modelu.
+
+Zobrazení aktuálního øetìzce, který je interpretován a vykreslen je v poli \emph{11}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{fig/color_spectrum.pdf}
+\caption{\emph{Roz¹íøená} barevná sada aplikace - barevné spektrum.}
+\label{fig:rozsirenebarvy}
+\end{figure}
+
+\subsubsection{Symboly a pravidla v LModeleru}
+
+Z pohledu interpretace mají symboly v LModeleru stejný význam jako v kapitole \ref{cha:zelva}, kde jsem je popsal v nìkolika tabulkách. Jedním z rozdílù je, ¾e aplikace neumí interpretovat symbol $ \sim $, vlo¾ení pøeddefinovaného tvaru, proto¾e na to není vytvoøena. V L-systémech, které se neohlí¾í na implementaci na poèítaèi se velmi èasto vyskytují indexy symbolu \emph{F}. Takové lze nalézt v pøíkladech \ref{exa:sierpinskiBeauty} a \ref{exa:ignorekont}. Indexy se ale velmi ¹patnì pracuje a to vede k druhému a poslednímu rozdílu v interpretaci symbolù. Roz¹íøil jsem význam symbolu \emph{F} i na dal¹í symboly od \emph{A} po \emph{P} a stejnì tak symbol \emph{f} lze nahradit kterýmkoli z \emph{a} a¾ \emph{p}. Zbytek znakù abecedy má spoleènì s èíslicemi význam neznámého symbolu, který je mo¾no pou¾ít v pravidlech, ale neinterpretuje se.
+
+Ka¾dé pravidlo uvedené v prvku \emph{3} musí být na samostatném øádku. Mezi pravidly se mù¾e vyskytovat libovolný poèet prázdných øádkù nebo øádku s bílými znaky, ale nesmí obsahovat jiné znaky, proto¾e pak nelze zjistit, jestli se jedná o pravidlo nebo ne. V¹echna pravidla mají spoleèný základní tvar
+\begin{equation*}
+symbol = \text{\emph{øetìzec}},
+\end{equation*}
+kde \emph{=} je povinný znak, který se v pravidle musí vyskytovat a zastupuje $ \rightarrow $ z dosud uvedených pravidel, a jako \emph{øetìzec} se poèítá i øetìzec o délce 0 znakù.
+
+\begin{example}
+\label{exa:pravidlo}
+Základní pravidlo z pøíkladu \ref{exa:kochstar}
+\begin{equation*}
+p \ : \ F\ \rightarrow \ F-F++F-F ,
+\end{equation*}
+lze pøepsat do tvaru v LModeleru
+\begin{equation*}
+F \ = \ F-F++F-F .
+\end{equation*}
+\end{example}
+
+Pokud uvedeme nìkolik pravidel se stejným symbolem na levé stranì, pøi derivaci je potøeba rozhodnout, které pravidlo se pou¾ije. V tento moment mají v¹echna pravidla, mezi kterými se rozhodujeme stejnou pravdìpodobnost, ale pokud chceme urèité pravidlo upøednostnit a definovat si vlastní pravdìpodobnosti, je potøeba pou¾ít stochastické systémy. Pravidlo zde bude mít tvar 
+\begin{equation*}
+symbol \ =\text{\emph{pravdìpodobnost}}= \ \text{\emph{øetìzec}},
+\end{equation*}
+kde oba dva znaky \emph{=} se v pravidle musí vyskytovat a \emph{pravdìpodobnost} je desetinné èíslo od 0 do 1 a souèet pravdìpodobností u pravidel se stejnou levou stranou musí být 1. Lze kombinovat pravidla s pravdìpodobností a bez ní. Pokud není pravdìpodobnost u pravidla dána, vyhledají se v¹echny pravidla se spoleènou pravdìpodobností a ka¾dé dostane stejný díl.
+
+\begin{example}
+\label{exa:pravidlostoch}
+Stochastická pravidla z pøíkladu \ref{exa:stoch}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ p_1 $ &: & $ F $ & $ \overset{.33}{\rightarrow} $ & $ F[+F]F[-F]F $ \\
+$ p_2 $ &: & $ F $ & $ \overset{.33}{\rightarrow} $ & $ F[+F]F $ \\
+$ p_3 $ &: & $ F $ & $ \overset{.34}{\rightarrow} $ & $ F[-F]F $ \\
+\end{tabular}
+\end{center}
+
+lze pøepsat do tohoto tvaru v LModeleru:
+\begin{eqnarray*}
+F & =0,33= & F[+F]F[-F]F \\
+F & =0,33= & F[+F]F \\
+F & = & F[-F]F 
+\end{eqnarray*}
+Poslednímu pravidlu bude automaticky dopoèítána zbylá pravdìpodobnost, která je $ 1,0-(2*0,33) = 0,34 $, tak¾e není potøeba ji uvádìt. Pokud bych chtìl pro v¹echny pravidla stejnou pravdìpodobnost, mohu vynechat její zadávání úplnì a formát v¹ech pravidel bude s jedním $ = $. 
+\end{example}
+
+Posledním zpùsobem, jak upravit pravidla je zadání kontextu, který se zadává ve stejném tvaru, jako v èásti \ref{subsec:ilsys}. Pravidla mají tvar
+\begin{equation*}
+\text{\emph{prekontext}} < symbol > \text{\emph{postkontext}} = \text{\emph{øetìzec}},
+\end{equation*}
+kde $ < $ a $ > $ jsou povinné znaky, které musí pravidlo obsahovat pokud má pøíslu¹ný kontext. \emph{Prekontext} je øetìzec definující levý kontext a analogicky \emph{postkontext} definuje pravý kontext. Levý a pravý kontext lze pou¾ít ka¾dý zvlá¹» i je kombinovat.
+
+\begin{example}
+\label{exa:pravidlokont}
+Kontextové pravidlo z pøíkladu \ref{exa:kontext}
+\begin{equation*}
+p_1 : \hspace{10pt} b \hspace{5pt} < \hspace{5pt} a \hspace{5pt} \rightarrow \hspace{5pt} b
+\end{equation*}
+lze pøepsat do tohoto tvaru v LModeleru:
+\begin{equation*}
+b \hspace{5pt} < \hspace{5pt} a \hspace{5pt} = \hspace{5pt} b
+\end{equation*}
+
+\end{example}
+
+V¹echny uvedené formy pravidel jsou navzájem kompatibilní a lze je dokonce kombinovat. Napøíklad lze zavést pravidlo s pravdìpodobností, které kontroluje kontext:
+\begin{equation*}
+\text{\emph{prekontext}} < symbol > \text{\emph{postkontext}} \ =\text{\emph{pravdìpodobnost}}= \ \text{\emph{øetìzec}}
+\end{equation*}
+V takovém pøípadì se poèítá pravdìpodobnost pro pravidla, která mají stejnou nejen levou stranu, ale i kontext.
+
+\subsection{Manipulace s modelem}
+
+V¹echny systémy jsou vizualizovány v zelené èásti aplikace (viz. obr. \ref{fig:aplikace}) jako 3D modely. I ty, které pracují pouze s jednou rovinou a jedním druhem rotací ¾elvy. Není jednoduché urèit vhodný pohled na obecný model, který by zachytil jeho smysl, a nìkdy to ani není mo¾né, a proto jsem zavedl základní manipulaci pomocí my¹i, která nemìní L-systém, ale pouze pohled na model.
+
+Fungují zde tøi druhy manipulace - \emph{rotace}, \emph{translace} a \emph{zmìna velikosti}. Rotace funguje pøi stisknutí levého tlaèítka my¹i a jejím ta¾ení do nìkterého smìru. Model rotuje v tomté¾ smìru s pøijatelnou rychlostí. Translace funguje na úplnì stejném principu, pouze místo levého je potøeba stisknout pravé tlaèítko. Poslední funkcí je zmìna velikosti, která vyu¾ívá koleèko my¹i. Pøi krokování koleèka smìrem od u¾ivatele se model zmen¹uje a pøi smìru k sobì se stejnou rychlostí zvìt¹uje.
+
+
+\subsection{Export a import XML}
+\label{subsec:xml}
+
+Pøi ukládání L-systému do souboru jsem pou¾il znaèkovacího jazyka XML\cite{xml} kvùli jeho velké podpoøe a vlastnostem. Také jsem pøihlédl k tomu, ¾e ukládaná data nebudou moc velká a ukládání v binární podobnì by u¹etøilo pouze zanedbatelné mno¾ství pamìti, co¾ se jeví jako naprosto zbyteèné, oproti mo¾nosti èíst soubory pouhým okem a zpracovat je bez potøeby spou¹tìt program a pøená¹et jej.
+
+V¹echny systémy mají v XML stejný tvar. Na úvodu je hlavièka s verzí a kódováním, následuje koøenový element \emph{lsystem} a v nìj jsou vnoøeny jednotlivé èásti systému. Je zde pìt elementù s hodnotou, které urèují vlastnosti systému - \emph{axiom} pro zadání axiomu, \emph{angle} pro urèení úhlu zatoèení ¾elvy, \emph{thickness} pro tlou¹»ku segmentù, \emph{contextIgnored} pro zadání symbolù ignorovaných pøi hledání kontextu a \emph{colorset} pro urèení pou¾ité barevné sady. Colorset mù¾e mít dvì hodnoty - \emph{basic} pro základní sadu a \emph{extended} pro roz¹íøenou. Soubor musí obsahovat ka¾dý ze zmínìných elementù právì jednou.
+
+Posledním elementem obsa¾eným v lsystem je \emph{rules}, element, který obsahuje jednotlivá pravidla, ka¾dé uzavøené v elementu \emph{rule}. Rule je element bez hodnoty, který obsahuje atributy s jednotlivými èástmi pravidla - \emph{precontext} - levý kontext, \emph{lside} - symbol s levou èástí pravidla, \emph{postcontext} - pravý kontext, \emph{rside} - pravá èást pravidla a \emph{probability} - pravdìpodobnost jako desetinné èíslo, splòující podmínky popsané vý¹e.
+
+\begin{example}
+Peano-Gosperova køivka ulo¾ená jako XML kompatibilní s LModelerem.
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<lsystem>
+        <axiom>FX</axiom>
+        <angle>60.0</angle>
+        <thickness>0.15</thickness>
+        <contextIgnored></contextIgnored>
+        <colorset>extended</colorset>
+        <rules>
+                <rule precontext="" lside="F" postcontext=""
+                       probability="1.0" rside="'" />
+                <rule precontext="" lside="Y" postcontext="" 
+                       probability="1.0" rside="+FX-FYFY--FY-FX++FX+FY" />
+                <rule precontext="" lside="X" postcontext="" 
+                       probability="1.0" rside="FX-FY--FY+FX++FXFX+FY-" />
+        </rules>
+</lsystem>
+\end{lstlisting}
+\end{example}
+
+
+\section{Vývoj a implementace}
+	\label{sec:vyvoj}
+
+Po vzniku návrhu, který odpovídal popisu aplikace z pøedchozí èásti kapitoly, byla hlavním problémem otázka výbìru programovacího jazyka. Návrh jsem vytváøel s my¹lenkou objektù, a proto jsem chtìl pou¾ít nìjaký objektovì orientovaný jazyk. Nakonec jsem zvolil \emph{Java SE}\cite{java}, proto¾e jsem s tímto jazykem u¾ pracoval a vyhovovalo mi jeho odstínìní od architektury, pøenositelnost a zároveò velká robustnost. Také jsem chtìl prozkoumat jeho mo¾nosti, co se týèe 3D grafiky a práce s grafickou kartou. Jako základní manuál jsem pou¾il tutoriály\cite{javatutorial} od spoleènosti Oracle, která v souèasnosti Javu spravuje.
+
+\subsubsection{Swing}
+
+Dal¹ím dùvodem pou¾ití Javy je ten, ¾e u¾ v standardní implementaci obsahuje grafickou knihovnu pro vytváøení GUI - \emph{Swing}, co¾ je dobøe navr¾ené a systematické API. Jeho kvalita je zdùvodnìna tím, ¾e v poèátcích Javy pro práci s grafikou existovala pouze knihovna AWT, která, podle \cite{javagui}, "byla ¹ita velmi horkou jehlou"\ a byla cílem mnoha stí¾ností. Brzy byla vylep¹ena a vznikl Swing, který odstranil velkou èást problémù a získává zpìt ztracenou reputaci. Swing je kompletnì implementován v Javì, tak¾e pøebírá její platformovou nezávislost a silnì vyu¾ívá dìdiènosti, která je tì¾i¹tìm Javy. Dal¹ím z dùvodù, proè jsem pou¾il Swing je jeho tutoriál\cite{swing}, také vytvoøený Oraclem, který je velmi kvalitní.
+
+\subsubsection{Netbeans a Eclipse}
+
+Implementaci aplikace lze provádìt ve vývojových prostøedích primárnì urèených pro Javu jako jsou \emph{Netbeans}\cite{netbeans} a \emph{Eclipse}\cite{eclipse}, které jsem pou¾il já. Existuje je¹tì øada dal¹ích, ale nejsou tak roz¹íøené, hlavnì pøi práci s Java SE. Obì vývojová prostøedí mohou být roz¹íøena ¹irokou ¹kálou doplòkù a podporovat i dal¹í jazyky jako je C/C++, PHP, atd. Hlavním dùvodem mého pou¾ití Netbeans byl integrovaný grafický editor GUI pracující se Swingem, který je v Eclipse potøeba doplnit a Eclipse jsem vyu¾il pro mo¾nosti exportovat celý projekt do spustitelného JAR\footnote{JAR - \textbf{J}ava \textbf{Ar}chive - archiv pro soubory s bajtkódem Javy. Nìkteré z nich je mo¾né spou¹tìt.} souboru, který obsahuje i ve¹keré potøebné knihovny. Dal¹í mo¾nosti jako je napøíklad refaktorizace kódu a správa projektù obsahují obì dvì a naprostá vìt¹ina ostatních vývojových prostøedí.
+
+
+\subsection{Pou¾ité knihovny a prostøedky}
+
+\subsubsection{JOGL}
+
+Modely generované z øetìzcù l-systému jsem vykresloval pomocí OpenGL skrze knihovnu \emph{JOGL}\cite{jogl}, kterou jsem více popsal v pøedchozí kapitole v èásti \ref{subsec:joglalwjgl} spoleènì s nástrojem \emph{Gluegen}\cite{gluegen}. Pro práci s touto knihovnou je potøeba importovat do pracovního prostoru (napø. ukázat vývojovému prostøedí kde se knihovna nachází nebo urèit cestu ke knihovnám pro skripty) nìkolik JAR souborù. Nìkteré z nich jsou bohu¾el systémovì závislé, proto¾e pracují na nízké úrovni, a vyskytují se drobné problémy pøi zaji¹tìní multiplatformnosti aplikace.
+
+\subsubsection{Vecmath}
+
+\emph{Vecmath}\cite{vecmath} je podprojekt Java 3D\cite{java3d}, vysokoúrovòového API pro práci s 3D grafikou, který se specializuje na vektorovou a maticovou matematiku, pro práci ve dvou nebo tøí-rozmìrném prostoru. Obsahuje tøídy pro vytvoøení 2x2, 3x3 a 4x4 matic, vektorù o 2-4 polo¾kách a také bodù v prostoru o 2-4 dimenzích a zároveò metody pro práci s nimi jako je násobení matic a vektorù a dal¹í. V mé práci jsem tuto knihovnu pou¾íval pøi interpretaci øetìzce u poèítání absolutní pozice bodù segmentu modelu a také u vektorù jednotlivých smìrù ¾elvy a jejich transformací.
+
+\subsubsection{Dom4j}
+
+\emph{Dom4j}\cite{dom} je open source knihovna pro práci s XML\cite{xml}, XPath a XSLT. Tato knihovna je sice star¹ího data, ale podporuje zmínìné jazyky ve standardu definovaném \emph{W3C}\footnote{W3C - World Wide Web Consortium - mezinárodní spoleènost vyjíjející standardy pro web.} a je plnì kompatibilní s aktuální verzí Javy. Vyu¾il jsem ji pro jednoduché vytváøení XML a také opaènì jeho zpracování, které jsem potøeboval pro ukládání L-systémù do souboru, jak jsem popsal v èásti \ref{subsec:xml}. Práce s knihovnou je velmi prostá, celá je implementována v Javì a distribuuje se v jednom JAR souboru.
+
+
+\subsection{Struktura a velikost kódu}
+
+Zdrojový kód je rozdìlen do dvou balíkù - \emph{lmodeler} a \emph{lsystem}. Lsystem obsahuje tøídy pro vytvoøení a práci s l-systémem jako gramatikou a zároveò jeho vykreslení jako 3D modelu ¾elví grafikou. Lmodeler se skládá ze tøíd, které vytváøejí GUI aplikace a umo¾òují do sebe zakomponovat l-systém.
+
+V balíku lsystem, tøída \emph{LRule} slou¾í pro vytvoøení objektu jednoho pravidla v L-systému, obsahuje pole pro zpracování kontextu i pro pravdìpodobnost. \emph{LsysException} je speciální výjimka pro chyby, které nastaly pøi zpracování l-systému. \emph{Lsystem} je základní tøída, které dává dohromady ostatní a její objekty se vytváøí pøi práci s l-systémem. MyPoint3d je tøída roz¹iøující \emph{Point3d} z Vecmath a obsahuje bod v prostoru, spoleènì s vektorem normály povrchu modelu v tomto bodì.  Tøída \emph{Turtle} reprezentuje objekt ¾elvy s jeho stavem a akcemi.
+
+Tì¾i¹tìm balíku lmodeler je tøída \emph{MainFrame} obsahující metodu main a vytváøející hlavní okno programu. K dal¹ím samostatným oknùm patøí tøídy \emph{AboutFrame} a \emph{HelpFrame} vytváøející okno informací o aplikaci a manuál ovládání. \emph{LPanel} vytváøí èást okna pro manipulaci s modelem a jeho vizualizaci, komunikuje s objektem LSystemu a urèuje, co se bude vykreslovat. Proto¾e program obsahuje více panelù oddìlených zálo¾kami, vytvoøil jsem speciální formát zálo¾ky, který je ve tøídì \emph{LPanelHeadline}. \emph{EListener} slou¾í jako posluchaè událostí renderovaného modelu, který øe¹í jeho vykreslování a spoleènì s \emph{ArcBall} i transformace pomocí my¹i.
+\begin{table}[h]
+\centering
+\begin{tabular}{|Mm{5cm}M|}
+ \hline
+ \phantom{pp}balík\phantom{pp} & tøída & poèet øádkù \\
+ \hline
+ &&\\
+ lsystem & & \\
+ $ \llcorner $ & LRule & 104 \\
+ & LsysException & 23 \\
+ & LSystem & 1358 \\
+ & MyPoint3d & 37 \\
+ & Turtle & 401 \\
+ &&\\
+ lmodeler & & \\
+ $ \llcorner $ & AboutFrame & 63 \\
+ & ArcBall & 252\\
+ & EListener & 220 \\
+ & HelpFrame & 170 \\
+ & LPanel & 480 \\
+ & LPanelHeadline & 138 \\
+ & MainFrame & 1069 \\
+ &&\\
+ \hline
+ \multicolumn{2}{|c}{Celkem}& 4315 \\
+ \hline
+\end{tabular}
+\caption{Rozdìlení a velikost zdrojových souborù.}
+\label{tab:allsymbols}
+\end{table}
+
+
+%====================================================================================================================================
+%====================================================================================================================================
+%====================================================================================================================================
+\chapter{Ukázkové modely}
+	\label{cha:ukazky}
+	
+\section{Draèí køivka}
+\begin{example}
+Draèí køivka - sobìpodobná køivka s vlastnostmi fraktálu.
+\newline
+
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{FX}  \\
+$ p_1 $ &: & F & $ \rightarrow $ & ' \\
+$ p_2 $ &: & X & $ \rightarrow $ & -FX++FY- \\
+$ p_3 $ &: & Y & $ \rightarrow $ & +FX--FY+ \\
+$ \delta $ &= & \multicolumn{3}{l}{$ 45^{\circ} $}
+\end{tabular}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Draci_krivka10.png}
+\caption{Draèí køivka v desáté derivaci.}
+\label{fig:exa:1.1}
+\end{figure}
+\end{example}
+\newpage
+
+\section{Trojrozmìrná Hilbertova køivka}
+\begin{example}
+3D varianta Hilbertovy køivky.
+\newline
+
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & X && \\
+$ p_1 $ &: & X & $ \rightarrow $ & $ '' \wedge \backslash XF \wedge \backslash XFX-F \wedge //XFX\&F+//XFX-F/X-/ $ \\
+$ \delta $ &= &  \multicolumn{3}{l}{$ 90^{\circ} $}
+\end{tabular}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Hilbertova_krivka3d1.png}
+\caption{První derivace Hilbertovy køivky.}
+\label{fig:exa:2.1}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Hilbertova_krivka3d4.png}
+\caption{Hilbertova køivka ve ètvrté derivaci.}
+\label{fig:exa:2.2}
+\end{figure}
+\end{example}
+\newpage
+
+\section{3D Rostlina 1}
+\begin{example}
+Model rostliny pøevzatý z \cite[strana 26]{beauty}.
+\newline
+
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: & \multicolumn{3}{l}{$ ,[\&FY!Z]/////[\&FY!Z]///////[\&FY!Z] $} \\
+$ p_1 $ &: & Z & $ \rightarrow $ & $ [\&FY!Z]/////[\&FY!Z]///////[\&FY!Z] $ \\
+$ p_2 $ &: & F & $ \rightarrow $ & $ X/////F $ \\
+$ p_3 $ &: & X & $ \rightarrow $ & $ FY $ \\
+$ p_4 $ &: & Y & $ \rightarrow $ & $ ['''' \wedge \wedge {-'f.+,f.+f.-|-f.+'f.+f.}] $ \\
+$ p_5 $ &: & F & $ \rightarrow $ & $ FF $ \\
+$ \delta $ &= &  \multicolumn{3}{l}{$ 25^{\circ} $}
+\end{tabular}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Rostlina3d1_3.png}
+\caption{Pohled na tøetí derivaci rostliny.}
+\label{fig:exa:3.1}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Rostlina3d1_5.png}
+\caption{Pohled pátou derivaci rostliny.}
+\label{fig:exa:3.2}
+\end{figure}
+\end{example}
+\newpage
+
+\section{3D Rostlina 2}
+\begin{example}
+Model rostliny pøevzatý z \cite[strana 27]{beauty}.
+\newline
+
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: &  \multicolumn{3}{l}{$ ,[\&FY!Z]/////[\&FY!Z]///////[\&FY!Z] $} \\
+$ p_1 $ &: & Q & $ \rightarrow $ & $ R+[Q+U]--//[--T]R[++T]-[QU]++QU $ \\
+$ p_2 $ &: & R & $ \rightarrow $ & $ FS[//\&\&T][//\wedge \wedge T]FS $ \\
+$ p_3 $ &: & S & $ \rightarrow $ & $ SFS $ \\
+$ p_4 $ &: & T & $ \rightarrow $ & $ ['{+f.-ff.-f.+ | +f.-ff.-f.}] $ \\
+$ p_5 $ &: & U & $ \rightarrow $ & $ [\&\&\&V'/W////W////W////W////W] $ \\
+$ p_6 $ &: & V & $ \rightarrow $ & $ FF $ \\
+$ p_7 $ &: & W & $ \rightarrow $ & $ [' \wedge F][{\&\&\&\&-f.+f.|-f.+f.}] $ \\
+$ \delta $ &= &  \multicolumn{3}{l}{$ 18^{\circ} $}
+\end{tabular}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Rostlina3d2_3.png}
+\caption{Pohled na tøetí derivaci rostliny.}
+\label{fig:exa:4.1}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Rostlina3d2_5.png}
+\caption{Pohled na pátou derivaci rostliny.}
+\label{fig:exa:4.2}
+\end{figure}
+\end{example}
+\newpage
+
+\section{2D Rostlina}
+\begin{example}
+Dvourozmìrný model rostliny.
+\newline
+
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccl}
+$ \omega $ &: &  \multicolumn{3}{l}{$ Z $} \\
+$ p_1 $ &: & Z & $ \rightarrow $ & $ '''''''ZFX['''''''!+Z][''''''!'-Z] $ \\
+$ p_2 $ &: & X & $ \rightarrow $ & $ X[-FFF][+FFF]FX $ \\
+$ \delta $ &= &  \multicolumn{3}{l}{$ 60^{\circ} $}
+\end{tabular}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Rostlina2d4.png}
+\caption{Ètvrtá derivace rostliny.}
+\label{fig:exa:5.1}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth-40mm]{fig/Rostlina2d7.png}
+\caption{Sedmá derivace rostliny.}
+\label{fig:exa:5.2}
+\end{figure}
+\end{example}
+
+%====================================================================================================================================
+%====================================================================================================================================
+%====================================================================================================================================
+\chapter{Závìr}
+	\label{cha:zaver}
+
+Cílem této bakaláøské práce bylo vytvoøit interaktivní systém pro generování 3D objektù. V práci jsem se nejprve vìnoval studiu L-systémù, ¾elví grafiky a mo¾nostem vykreslování 3D objektù jimi generovaných. Poté jsem pomocí získaných znalostí vytvoøil aplikaci v jazyce Java, která provádí zmínìné akce s pomocí knihovny JOGL.
+
+Vytvoøil jsem plnì funkèní aplikaci, která mù¾e bì¾et i na slab¹ích strojích, ov¹em kvùli èasové slo¾itosti zpracování L-systémù a jejich fraktálové podstatì, èasto je mo¾né dostat se do situace, ¾e pro výpoèet vy¹¹ích derivací systému nebude staèit ani ten nejvýkonnìj¹í stroj. Tomuto jevu se nelze nijak vyhnout.
+
+Pøi zpracování práce jsem se pouèil o mo¾nostech vytváøení fraktálù a procedurálního modelování, také o vykreslování trojrozmìrné grafiky a její navázání na grafické rozhraní aplikace. 
+Také jsem nastudoval matematické pozadí pro 3D grafiku a rùzná grafická API a pou¾il jsem je v praxi, pro vykreslování modelù, které jsem vygeneroval.
+
+\section{Dal¹í vývoj projektu}
+
+Mezi mo¾nosti vývoje aplikace v èásti týkající se L-systémù patøí roz¹íøení zpracovávaných systémù o parametrické systémy (viz. \ref{subsec:paramsys}) a rozpracování principu náhodných mutací øetìzce i samotných pravidel L-systému, jak je zavádí Lapré v \emph{Lparseru}\cite{lparser}. Z pohledu ¾elví grafiky a vykreslování rostlin lze zavést efekt pùsobení gravitace a dal¹ích jevù na tvar rostliny - tento jev se nazývá \emph{tropismus}\cite[strany 806, 823 a 825]{biologie} a implementovat podporu textur pro vìrnìj¹í zobrazení kùry a listù. Pro usnadnìní práce s aplikací lze doplnit volitelnost barvy pozadí modelu a export modelù do formátù podporovaných zavedenými aplikacemi pro práci s 3D.
+
+

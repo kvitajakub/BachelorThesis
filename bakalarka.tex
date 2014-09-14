@@ -1,0 +1,196 @@
+%============================================================================
+% tento soubor pouzijte jako zaklad
+% (c) 2008 Michal Bidlo
+% E-mail: bidlom AT fit vutbr cz
+%============================================================================
+% kodovaní: iso-8859-2 (zmena prikazem iconv, recode nebo cstocs)
+%----------------------------------------------------------------------------
+% zpracování: make, make pdf, make desky, make clean
+% pøipomínky posílejte na e-mail: bidlom AT fit.vutbr.cz
+% vim: set syntax=tex encoding=latin2:
+%============================================================================
+\documentclass[cover]{fitthesis} % odevzdani do wisu - odkazy, na ktere se da klikat
+%\documentclass[cover,print]{fitthesis} % pro tisk - na odkazy se neda klikat
+%\documentclass[print]{fitthesis} % pro tisk - na odkazy se neda klikat
+%      \documentclass[english]{fitthesis}
+% * Je-li prace psana v anglickem jazyce, je zapotrebi u tridy pouzit 
+%   parametr english nasledovne:
+%      \documentclass[english]{fitthesis}
+% * Neprejete-li si vysazet na prvni strane dokumentu desky, zruste 
+%   parametr cover
+
+% zde zvolime kodovani, ve kterem je napsan text prace
+% "latin2" pro iso8859-2 nebo "cp1250" pro windows-1250, "utf8" pro "utf-8"
+%\usepackage{ucs}
+\usepackage[latin2]{inputenc}
+\usepackage[T1, IL2]{fontenc}
+\usepackage{url}
+\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
+
+%zde muzeme vlozit vlastni balicky
+
+%balicek pro todo veci- hodi se ale neni potreba pri odevzdani
+\usepackage[textwidth=2cm]{todonotes}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%zmena sirky tabulky
+\usepackage{graphicx}
+\usepackage{array}
+	\newcolumntype{M}{>{$\vcenter\bgroup\hbox\bgroup}c<{\egroup\egroup$}}
+\usepackage{comment}
+\usepackage{amsthm}	
+	\newtheoremstyle{definice}% name
+	  {20pt}%      Space above
+	  {20pt}%      Space below
+	  {}%         Body font
+	  {}%         Indent amount (empty = no indent, \parindent = para indent)
+	  {\bfseries}% Thm head font
+	  { --}%        Punctuation after thm head
+	  { }%     Space after thm head: " " = normal interword space;\newline = linebreak
+	  {}%         Thm head spec (can be left empty, meaning `normal')
+	\theoremstyle{definice}
+	\newtheorem{definition}{Definice}[section]
+	
+	\newtheoremstyle{example}
+	  {20pt}%      Space above
+	  {20pt}%      Space below
+	  {}%         Body font
+	  {}%         Indent amount (empty = no indent, \parindent = para indent)
+	  {\bfseries}% Thm head font
+	  {}%        Punctuation after thm head
+	  {\newline}%     Space after thm head (\newline = linebreak)
+	  {}%         Thm head spec
+	\theoremstyle{example}
+	\newtheorem{example}{Pøíklad}[section]
+\usepackage{mdwlist}
+\usepackage{color}
+
+\newcommand\mytodo[1]{\textcolor{red}{[[#1]]}}
+
+\usepackage{listings}
+\usepackage{textcomp}
+
+\definecolor{purple}{rgb}{0.5,0,1.0}
+\definecolor{blue}{rgb}{0.0,0.0,0.8}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstdefinelanguage{MYXML}
+{
+  morestring=[s]{>}{<},
+  morecomment=[s]{"}{"},
+  commentstyle=\color{purple},
+  stringstyle=\color{black},
+  identifierstyle=\color{red},
+  keywordstyle=\color{blue},
+  morekeywords={lsystem,axiom,angle, thickness,colorset,contextIgnored,rules,rule,xml}
+}
+
+\lstset{
+  language=MYXML,
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false
+}
+
+\usepackage{multirow}
+
+% =======================================================================
+% balíèek "hyperref" vytváøí klikací odkazy v pdf, pokud tedy pou¾ijeme pdflatex
+% problém je, ¾e balíèek hyperref musí být uveden jako poslední, tak¾e nemù¾e
+% být v ¹ablonì
+\ifWis
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex]{hyperref}
+  \definecolor{links}{rgb}{0.4,0.5,0}
+  \definecolor{anchors}{rgb}{1,0,0}
+  \def\AnchorColor{anchors}
+  \def\LinkColor{links}
+  \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajù kolem odkazù
+  \pdfcompresslevel=9
+\fi
+\fi
+%Informace o praci/projektu
+%---------------------------------------------------------------------------
+\projectinfo{
+  %Prace
+  project=BP,            %typ prace BP/SP/DP/DR
+  year=2013,             %rok
+  date=\today,           %datum odevzdani
+  %Nazev prace
+  title.cs={Generátor 3D objektù s vyu¾itím L-systémù},  %nazev prace v cestine
+  title.en={Generator of 3D Objects Based on L-Systems}, %nazev prace v anglictine
+  %Autor
+  author={Jakub Kvita},   %jmeno prijmeni autora
+  %author.title.p=Bc., %titul pred jmenem (nepovinne)
+  %author.title.a=PhD, %titul za jmenem (nepovinne)
+  %Ustav
+  department=UIFS, % doplnte prislusnou zkratku: UPSY/UIFS/UITS/UPGM
+  %Skolitel
+  supervisor= Luká¹ Vrábel, %jmeno prijmeni skolitele
+  supervisor.title.p=Ing.,   %titul pred jmenem (nepovinne)
+%  supervisor.title.a={},    %titul za jmenem (nepovinne)
+  %Klicova slova, abstrakty, prohlaseni a podekovani je mozne definovat 
+  %bud pomoci nasledujicich parametru nebo pomoci vyhrazenych maker (viz dale)
+  %===========================================================================
+  %Klicova slova
+  keywords.cs={L-systémy, Lindenmayerovy systémy, formální gramatika, ¾elví grafika, fraktály, modelování rostlin, 3D grafika, Java, JOGL}, %klicova slova v ceskem jazyce
+  keywords.en={L-systems, Lindenmayer systems, formal grammar, turtle graphics, fractals, plant modelling, 3D graphics, Java, JOGL}, %klicova slova v anglickem jazyce
+  %Abstract
+  abstract.cs={Cílem této bakaláøské práce bylo vytvoøit interaktivní systém pro generování 3D modelù. Generátor je zalo¾en na L-systémech jako druhu formálních gramatik a ¾elví grafice pro 3D modelování. Aplikace byla vytvoøena v Javì SE s pomocí knihovny JOGL jako pøístupovým bodem k OpenGL k vykreslování grafiky. Práce postupnì rozebírá teoretický základ L-systémù, ¾elví grafiku a vykreslování 3D objektù a poté popisuje vytvoøení aplikace pomocí získaných znalostí.}, % abstrakt v ceskem jazyce
+  abstract.en={The aim of this bachelor thesis was to create an interactive system for generating 3D models. The generator is based on L-systems as a kind of formal grammars and turtle graphics for 3D modeling. The application was created in Java SE using JOGL library as access point for OpenGL and rendering. The thesis analyze the theoretical basis of L-systems, turtle graphics and rendering 3D objects and then describes creation of application using the acquired knowledge.}, % abstrakt v anglickem jazyce
+  %Prohlaseni
+  declaration={Prohla¹uji, ¾e jsem tuto bakaláøskou práci vypracoval samostatnì pod vedením pánù Luká¹e Vrábela a Pavla Ti¹novského a s uvedením v¹ech pou¾itých zdrojù.},
+  %Podekovani (nepovinne)
+  acknowledgment={Chtìl bych podìkovat panu Ti¹novskému za poèáteèní impuls u výbìru práce a panu Vrábelovi za velmi pøínosné konzultace ve v¹ech denních i noèních hodinách.} % nepovinne
+}
+
+%Abstrakt (cesky, anglicky)
+%\abstract[cs]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v èeském jazyce.}
+%\abstract[en]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v anglickém jazyce.}
+
+%Klicova slova (cesky, anglicky)
+%\keywords[cs]{Sem budou zapsána jednotlivá klíèová slova v èeském jazyce, oddìlená èárkami.}
+%\keywords[en]{Sem budou zapsána jednotlivá klíèová slova v anglickém jazyce, oddìlená èárkami.}
+
+%Prohlaseni
+%\declaration{Prohla¹uji, ¾e jsem tuto bakaláøskou práci vypracoval samostatnì pod vedením pana X...
+%Dal¹í informace mi poskytli...
+%Uvedl jsem v¹echny literární prameny a publikace, ze kterých jsem èerpal.}
+
+%Podekovani (nepovinne)
+%\acknowledgment{V této sekci je mo¾no uvést podìkování vedoucímu práce a tìm, kteøí poskytli odbornou pomoc
+%(externí zadavatel, konzultant, apod.).}
+
+\begin{document}
+  % Vysazeni titulnich stran
+  % ----------------------------------------------
+  \maketitle
+  % Obsah
+  % ----------------------------------------------
+  \tableofcontents
+  
+  % Seznam obrazku a tabulek (pokud prace obsahuje velke mnozstvi obrazku, tak se to hodi)
+  % \listoffigures
+  % \listoftables 
+
+  % Text prace
+  % ----------------------------------------------
+  \input{obsah} % viz. obsah.tex
+
+  % Pouzita literatura
+  % ----------------------------------------------
+\ifczech
+  \bibliographystyle{czechiso}
+\else 
+  \bibliographystyle{plain}
+%  \bibliographystyle{alpha}
+\fi
+  \begin{flushleft}
+  \bibliography{literatura} % viz. literatura.bib
+  \end{flushleft}
+  \appendix
+  
+  \input{prilohy} % viz. prilohy.tex
+\end{document}

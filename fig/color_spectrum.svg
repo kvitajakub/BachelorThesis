@@ -1,0 +1,1870 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="900.2644"
+   height="269.5249"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="color_spectrum - kopie.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3142">
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="0.0"
+         id="WL0nm" />
+      <stop
+         style="stop-color:#ff0600;stop-opacity:1;"
+         offset="0.00392156862745098"
+         id="WL1nm" />
+      <stop
+         style="stop-color:#ff0c00;stop-opacity:1;"
+         offset="0.00784313725490196"
+         id="WL2nm" />
+      <stop
+         style="stop-color:#ff1200;stop-opacity:1;"
+         offset="0.011764705882352941"
+         id="WL3nm" />
+      <stop
+         style="stop-color:#ff1800;stop-opacity:1;"
+         offset="0.01568627450980392"
+         id="WL4nm" />
+      <stop
+         style="stop-color:#ff1e00;stop-opacity:1;"
+         offset="0.0196078431372549"
+         id="WL5nm" />
+      <stop
+         style="stop-color:#ff2400;stop-opacity:1;"
+         offset="0.023529411764705882"
+         id="WL6nm" />
+      <stop
+         style="stop-color:#ff2a00;stop-opacity:1;"
+         offset="0.027450980392156862"
+         id="WL7nm" />
+      <stop
+         style="stop-color:#ff3000;stop-opacity:1;"
+         offset="0.03137254901960784"
+         id="WL8nm" />
+      <stop
+         style="stop-color:#ff3600;stop-opacity:1;"
+         offset="0.03529411764705882"
+         id="WL9nm" />
+      <stop
+         style="stop-color:#ff3c00;stop-opacity:1;"
+         offset="0.0392156862745098"
+         id="WL10nm" />
+      <stop
+         style="stop-color:#ff4200;stop-opacity:1;"
+         offset="0.043137254901960784"
+         id="WL11nm" />
+      <stop
+         style="stop-color:#ff4800;stop-opacity:1;"
+         offset="0.047058823529411764"
+         id="WL12nm" />
+      <stop
+         style="stop-color:#ff4e00;stop-opacity:1;"
+         offset="0.050980392156862744"
+         id="WL13nm" />
+      <stop
+         style="stop-color:#ff5400;stop-opacity:1;"
+         offset="0.054901960784313725"
+         id="WL14nm" />
+      <stop
+         style="stop-color:#ff5a00;stop-opacity:1;"
+         offset="0.058823529411764705"
+         id="WL15nm" />
+      <stop
+         style="stop-color:#ff6000;stop-opacity:1;"
+         offset="0.06274509803921569"
+         id="WL16nm" />
+      <stop
+         style="stop-color:#ff6600;stop-opacity:1;"
+         offset="0.06666666666666667"
+         id="WL17nm" />
+      <stop
+         style="stop-color:#ff6c00;stop-opacity:1;"
+         offset="0.07058823529411765"
+         id="WL18nm" />
+      <stop
+         style="stop-color:#ff7200;stop-opacity:1;"
+         offset="0.07450980392156863"
+         id="WL19nm" />
+      <stop
+         style="stop-color:#ff7800;stop-opacity:1;"
+         offset="0.0784313725490196"
+         id="WL20nm" />
+      <stop
+         style="stop-color:#ff7e00;stop-opacity:1;"
+         offset="0.08235294117647059"
+         id="WL21nm" />
+      <stop
+         style="stop-color:#ff8300;stop-opacity:1;"
+         offset="0.08627450980392157"
+         id="WL22nm" />
+      <stop
+         style="stop-color:#ff8900;stop-opacity:1;"
+         offset="0.09019607843137255"
+         id="WL23nm" />
+      <stop
+         style="stop-color:#ff8f00;stop-opacity:1;"
+         offset="0.09411764705882353"
+         id="WL24nm" />
+      <stop
+         style="stop-color:#ff9500;stop-opacity:1;"
+         offset="0.09803921568627451"
+         id="WL25nm" />
+      <stop
+         style="stop-color:#ff9b00;stop-opacity:1;"
+         offset="0.10196078431372549"
+         id="WL26nm" />
+      <stop
+         style="stop-color:#ffa100;stop-opacity:1;"
+         offset="0.10588235294117647"
+         id="WL27nm" />
+      <stop
+         style="stop-color:#ffa700;stop-opacity:1;"
+         offset="0.10980392156862745"
+         id="WL28nm" />
+      <stop
+         style="stop-color:#ffad00;stop-opacity:1;"
+         offset="0.11372549019607843"
+         id="WL29nm" />
+      <stop
+         style="stop-color:#ffb300;stop-opacity:1;"
+         offset="0.11764705882352941"
+         id="WL30nm" />
+      <stop
+         style="stop-color:#ffb900;stop-opacity:1;"
+         offset="0.12156862745098039"
+         id="WL31nm" />
+      <stop
+         style="stop-color:#ffbf00;stop-opacity:1;"
+         offset="0.12549019607843137"
+         id="WL32nm" />
+      <stop
+         style="stop-color:#ffc500;stop-opacity:1;"
+         offset="0.12941176470588237"
+         id="WL33nm" />
+      <stop
+         style="stop-color:#ffcb00;stop-opacity:1;"
+         offset="0.13333333333333333"
+         id="WL34nm" />
+      <stop
+         style="stop-color:#ffd100;stop-opacity:1;"
+         offset="0.13725490196078433"
+         id="WL35nm" />
+      <stop
+         style="stop-color:#ffd700;stop-opacity:1;"
+         offset="0.1411764705882353"
+         id="WL36nm" />
+      <stop
+         style="stop-color:#ffdd00;stop-opacity:1;"
+         offset="0.1450980392156863"
+         id="WL37nm" />
+      <stop
+         style="stop-color:#ffe300;stop-opacity:1;"
+         offset="0.14901960784313725"
+         id="WL38nm" />
+      <stop
+         style="stop-color:#ffe900;stop-opacity:1;"
+         offset="0.15294117647058825"
+         id="WL39nm" />
+      <stop
+         style="stop-color:#ffef00;stop-opacity:1;"
+         offset="0.1568627450980392"
+         id="WL40nm" />
+      <stop
+         style="stop-color:#fff500;stop-opacity:1;"
+         offset="0.1607843137254902"
+         id="WL41nm" />
+      <stop
+         style="stop-color:#fffb00;stop-opacity:1;"
+         offset="0.16470588235294117"
+         id="WL42nm" />
+      <stop
+         style="stop-color:#fdff00;stop-opacity:1;"
+         offset="0.16862745098039217"
+         id="WL43nm" />
+      <stop
+         style="stop-color:#f7ff00;stop-opacity:1;"
+         offset="0.17254901960784313"
+         id="WL44nm" />
+      <stop
+         style="stop-color:#f1ff00;stop-opacity:1;"
+         offset="0.17647058823529413"
+         id="WL45nm" />
+      <stop
+         style="stop-color:#ebff00;stop-opacity:1;"
+         offset="0.1803921568627451"
+         id="WL46nm" />
+      <stop
+         style="stop-color:#e5ff00;stop-opacity:1;"
+         offset="0.1843137254901961"
+         id="WL47nm" />
+      <stop
+         style="stop-color:#dfff00;stop-opacity:1;"
+         offset="0.18823529411764706"
+         id="WL48nm" />
+      <stop
+         style="stop-color:#d9ff00;stop-opacity:1;"
+         offset="0.19215686274509805"
+         id="WL49nm" />
+      <stop
+         style="stop-color:#d3ff00;stop-opacity:1;"
+         offset="0.19607843137254902"
+         id="WL50nm" />
+      <stop
+         style="stop-color:#cdff00;stop-opacity:1;"
+         offset="0.2"
+         id="WL51nm" />
+      <stop
+         style="stop-color:#c7ff00;stop-opacity:1;"
+         offset="0.20392156862745098"
+         id="WL52nm" />
+      <stop
+         style="stop-color:#c1ff00;stop-opacity:1;"
+         offset="0.20784313725490197"
+         id="WL53nm" />
+      <stop
+         style="stop-color:#bbff00;stop-opacity:1;"
+         offset="0.21176470588235294"
+         id="WL54nm" />
+      <stop
+         style="stop-color:#b5ff00;stop-opacity:1;"
+         offset="0.21568627450980393"
+         id="WL55nm" />
+      <stop
+         style="stop-color:#afff00;stop-opacity:1;"
+         offset="0.2196078431372549"
+         id="WL56nm" />
+      <stop
+         style="stop-color:#a9ff00;stop-opacity:1;"
+         offset="0.2235294117647059"
+         id="WL57nm" />
+      <stop
+         style="stop-color:#a3ff00;stop-opacity:1;"
+         offset="0.22745098039215686"
+         id="WL58nm" />
+      <stop
+         style="stop-color:#9dff00;stop-opacity:1;"
+         offset="0.23137254901960785"
+         id="WL59nm" />
+      <stop
+         style="stop-color:#97ff00;stop-opacity:1;"
+         offset="0.23529411764705882"
+         id="WL60nm" />
+      <stop
+         style="stop-color:#91ff00;stop-opacity:1;"
+         offset="0.23921568627450981"
+         id="WL61nm" />
+      <stop
+         style="stop-color:#8bff00;stop-opacity:1;"
+         offset="0.24313725490196078"
+         id="WL62nm" />
+      <stop
+         style="stop-color:#85ff00;stop-opacity:1;"
+         offset="0.24705882352941178"
+         id="WL63nm" />
+      <stop
+         style="stop-color:#80ff00;stop-opacity:1;"
+         offset="0.25098039215686274"
+         id="WL64nm" />
+      <stop
+         style="stop-color:#7aff00;stop-opacity:1;"
+         offset="0.2549019607843137"
+         id="WL65nm" />
+      <stop
+         style="stop-color:#74ff00;stop-opacity:1;"
+         offset="0.25882352941176473"
+         id="WL66nm" />
+      <stop
+         style="stop-color:#6eff00;stop-opacity:1;"
+         offset="0.2627450980392157"
+         id="WL67nm" />
+      <stop
+         style="stop-color:#68ff00;stop-opacity:1;"
+         offset="0.26666666666666666"
+         id="WL68nm" />
+      <stop
+         style="stop-color:#62ff00;stop-opacity:1;"
+         offset="0.27058823529411763"
+         id="WL69nm" />
+      <stop
+         style="stop-color:#5cff00;stop-opacity:1;"
+         offset="0.27450980392156865"
+         id="WL70nm" />
+      <stop
+         style="stop-color:#56ff00;stop-opacity:1;"
+         offset="0.2784313725490196"
+         id="WL71nm" />
+      <stop
+         style="stop-color:#50ff00;stop-opacity:1;"
+         offset="0.2823529411764706"
+         id="WL72nm" />
+      <stop
+         style="stop-color:#4aff00;stop-opacity:1;"
+         offset="0.28627450980392155"
+         id="WL73nm" />
+      <stop
+         style="stop-color:#44ff00;stop-opacity:1;"
+         offset="0.2901960784313726"
+         id="WL74nm" />
+      <stop
+         style="stop-color:#3eff00;stop-opacity:1;"
+         offset="0.29411764705882354"
+         id="WL75nm" />
+      <stop
+         style="stop-color:#38ff00;stop-opacity:1;"
+         offset="0.2980392156862745"
+         id="WL76nm" />
+      <stop
+         style="stop-color:#32ff00;stop-opacity:1;"
+         offset="0.30196078431372547"
+         id="WL77nm" />
+      <stop
+         style="stop-color:#2cff00;stop-opacity:1;"
+         offset="0.3058823529411765"
+         id="WL78nm" />
+      <stop
+         style="stop-color:#26ff00;stop-opacity:1;"
+         offset="0.30980392156862746"
+         id="WL79nm" />
+      <stop
+         style="stop-color:#20ff00;stop-opacity:1;"
+         offset="0.3137254901960784"
+         id="WL80nm" />
+      <stop
+         style="stop-color:#1aff00;stop-opacity:1;"
+         offset="0.3176470588235294"
+         id="WL81nm" />
+      <stop
+         style="stop-color:#14ff00;stop-opacity:1;"
+         offset="0.3215686274509804"
+         id="WL82nm" />
+      <stop
+         style="stop-color:#0eff00;stop-opacity:1;"
+         offset="0.3254901960784314"
+         id="WL83nm" />
+      <stop
+         style="stop-color:#08ff00;stop-opacity:1;"
+         offset="0.32941176470588235"
+         id="WL84nm" />
+      <stop
+         style="stop-color:#02ff00;stop-opacity:1;"
+         offset="0.3333333333333333"
+         id="WL85nm" />
+      <stop
+         style="stop-color:#00ff04;stop-opacity:1;"
+         offset="0.33725490196078434"
+         id="WL86nm" />
+      <stop
+         style="stop-color:#00ff0a;stop-opacity:1;"
+         offset="0.3411764705882353"
+         id="WL87nm" />
+      <stop
+         style="stop-color:#00ff10;stop-opacity:1;"
+         offset="0.34509803921568627"
+         id="WL88nm" />
+      <stop
+         style="stop-color:#00ff16;stop-opacity:1;"
+         offset="0.34901960784313724"
+         id="WL89nm" />
+      <stop
+         style="stop-color:#00ff1c;stop-opacity:1;"
+         offset="0.35294117647058826"
+         id="WL90nm" />
+      <stop
+         style="stop-color:#00ff22;stop-opacity:1;"
+         offset="0.3568627450980392"
+         id="WL91nm" />
+      <stop
+         style="stop-color:#00ff28;stop-opacity:1;"
+         offset="0.3607843137254902"
+         id="WL92nm" />
+      <stop
+         style="stop-color:#00ff2e;stop-opacity:1;"
+         offset="0.36470588235294116"
+         id="WL93nm" />
+      <stop
+         style="stop-color:#00ff34;stop-opacity:1;"
+         offset="0.3686274509803922"
+         id="WL94nm" />
+      <stop
+         style="stop-color:#00ff3a;stop-opacity:1;"
+         offset="0.37254901960784315"
+         id="WL95nm" />
+      <stop
+         style="stop-color:#00ff40;stop-opacity:1;"
+         offset="0.3764705882352941"
+         id="WL96nm" />
+      <stop
+         style="stop-color:#00ff46;stop-opacity:1;"
+         offset="0.3803921568627451"
+         id="WL97nm" />
+      <stop
+         style="stop-color:#00ff4c;stop-opacity:1;"
+         offset="0.3843137254901961"
+         id="WL98nm" />
+      <stop
+         style="stop-color:#00ff52;stop-opacity:1;"
+         offset="0.38823529411764707"
+         id="WL99nm" />
+      <stop
+         style="stop-color:#00ff58;stop-opacity:1;"
+         offset="0.39215686274509803"
+         id="WL100nm" />
+      <stop
+         style="stop-color:#00ff5e;stop-opacity:1;"
+         offset="0.396078431372549"
+         id="WL101nm" />
+      <stop
+         style="stop-color:#00ff64;stop-opacity:1;"
+         offset="0.4"
+         id="WL102nm" />
+      <stop
+         style="stop-color:#00ff6a;stop-opacity:1;"
+         offset="0.403921568627451"
+         id="WL103nm" />
+      <stop
+         style="stop-color:#00ff70;stop-opacity:1;"
+         offset="0.40784313725490196"
+         id="WL104nm" />
+      <stop
+         style="stop-color:#00ff76;stop-opacity:1;"
+         offset="0.4117647058823529"
+         id="WL105nm" />
+      <stop
+         style="stop-color:#00ff7c;stop-opacity:1;"
+         offset="0.41568627450980394"
+         id="WL106nm" />
+      <stop
+         style="stop-color:#00ff81;stop-opacity:1;"
+         offset="0.4196078431372549"
+         id="WL107nm" />
+      <stop
+         style="stop-color:#00ff87;stop-opacity:1;"
+         offset="0.4235294117647059"
+         id="WL108nm" />
+      <stop
+         style="stop-color:#00ff8d;stop-opacity:1;"
+         offset="0.42745098039215684"
+         id="WL109nm" />
+      <stop
+         style="stop-color:#00ff93;stop-opacity:1;"
+         offset="0.43137254901960786"
+         id="WL110nm" />
+      <stop
+         style="stop-color:#00ff99;stop-opacity:1;"
+         offset="0.43529411764705883"
+         id="WL111nm" />
+      <stop
+         style="stop-color:#00ff9f;stop-opacity:1;"
+         offset="0.4392156862745098"
+         id="WL112nm" />
+      <stop
+         style="stop-color:#00ffa5;stop-opacity:1;"
+         offset="0.44313725490196076"
+         id="WL113nm" />
+      <stop
+         style="stop-color:#00ffab;stop-opacity:1;"
+         offset="0.4470588235294118"
+         id="WL114nm" />
+      <stop
+         style="stop-color:#00ffb1;stop-opacity:1;"
+         offset="0.45098039215686275"
+         id="WL115nm" />
+      <stop
+         style="stop-color:#00ffb7;stop-opacity:1;"
+         offset="0.4549019607843137"
+         id="WL116nm" />
+      <stop
+         style="stop-color:#00ffbd;stop-opacity:1;"
+         offset="0.4588235294117647"
+         id="WL117nm" />
+      <stop
+         style="stop-color:#00ffc3;stop-opacity:1;"
+         offset="0.4627450980392157"
+         id="WL118nm" />
+      <stop
+         style="stop-color:#00ffc9;stop-opacity:1;"
+         offset="0.4666666666666667"
+         id="WL119nm" />
+      <stop
+         style="stop-color:#00ffcf;stop-opacity:1;"
+         offset="0.47058823529411764"
+         id="WL120nm" />
+      <stop
+         style="stop-color:#00ffd5;stop-opacity:1;"
+         offset="0.4745098039215686"
+         id="WL121nm" />
+      <stop
+         style="stop-color:#00ffdb;stop-opacity:1;"
+         offset="0.47843137254901963"
+         id="WL122nm" />
+      <stop
+         style="stop-color:#00ffe1;stop-opacity:1;"
+         offset="0.4823529411764706"
+         id="WL123nm" />
+      <stop
+         style="stop-color:#00ffe7;stop-opacity:1;"
+         offset="0.48627450980392156"
+         id="WL124nm" />
+      <stop
+         style="stop-color:#00ffed;stop-opacity:1;"
+         offset="0.49019607843137253"
+         id="WL125nm" />
+      <stop
+         style="stop-color:#00fff3;stop-opacity:1;"
+         offset="0.49411764705882355"
+         id="WL126nm" />
+      <stop
+         style="stop-color:#00fff9;stop-opacity:1;"
+         offset="0.4980392156862745"
+         id="WL127nm" />
+      <stop
+         style="stop-color:#00ffff;stop-opacity:1;"
+         offset="0.5019607843137255"
+         id="WL128nm" />
+      <stop
+         style="stop-color:#00f9ff;stop-opacity:1;"
+         offset="0.5058823529411764"
+         id="WL129nm" />
+      <stop
+         style="stop-color:#00f3ff;stop-opacity:1;"
+         offset="0.5098039215686274"
+         id="WL130nm" />
+      <stop
+         style="stop-color:#00edff;stop-opacity:1;"
+         offset="0.5137254901960784"
+         id="WL131nm" />
+      <stop
+         style="stop-color:#00e7ff;stop-opacity:1;"
+         offset="0.5176470588235295"
+         id="WL132nm" />
+      <stop
+         style="stop-color:#00e1ff;stop-opacity:1;"
+         offset="0.5215686274509804"
+         id="WL133nm" />
+      <stop
+         style="stop-color:#00dbff;stop-opacity:1;"
+         offset="0.5254901960784314"
+         id="WL134nm" />
+      <stop
+         style="stop-color:#00d5ff;stop-opacity:1;"
+         offset="0.5294117647058824"
+         id="WL135nm" />
+      <stop
+         style="stop-color:#00cfff;stop-opacity:1;"
+         offset="0.5333333333333333"
+         id="WL136nm" />
+      <stop
+         style="stop-color:#00c9ff;stop-opacity:1;"
+         offset="0.5372549019607843"
+         id="WL137nm" />
+      <stop
+         style="stop-color:#00c3ff;stop-opacity:1;"
+         offset="0.5411764705882353"
+         id="WL138nm" />
+      <stop
+         style="stop-color:#00bdff;stop-opacity:1;"
+         offset="0.5450980392156862"
+         id="WL139nm" />
+      <stop
+         style="stop-color:#00b7ff;stop-opacity:1;"
+         offset="0.5490196078431373"
+         id="WL140nm" />
+      <stop
+         style="stop-color:#00b1ff;stop-opacity:1;"
+         offset="0.5529411764705883"
+         id="WL141nm" />
+      <stop
+         style="stop-color:#00abff;stop-opacity:1;"
+         offset="0.5568627450980392"
+         id="WL142nm" />
+      <stop
+         style="stop-color:#00a5ff;stop-opacity:1;"
+         offset="0.5607843137254902"
+         id="WL143nm" />
+      <stop
+         style="stop-color:#009fff;stop-opacity:1;"
+         offset="0.5647058823529412"
+         id="WL144nm" />
+      <stop
+         style="stop-color:#0099ff;stop-opacity:1;"
+         offset="0.5686274509803921"
+         id="WL145nm" />
+      <stop
+         style="stop-color:#0093ff;stop-opacity:1;"
+         offset="0.5725490196078431"
+         id="WL146nm" />
+      <stop
+         style="stop-color:#008dff;stop-opacity:1;"
+         offset="0.5764705882352941"
+         id="WL147nm" />
+      <stop
+         style="stop-color:#0087ff;stop-opacity:1;"
+         offset="0.5803921568627451"
+         id="WL148nm" />
+      <stop
+         style="stop-color:#0081ff;stop-opacity:1;"
+         offset="0.5843137254901961"
+         id="WL149nm" />
+      <stop
+         style="stop-color:#007cff;stop-opacity:1;"
+         offset="0.5882352941176471"
+         id="WL150nm" />
+      <stop
+         style="stop-color:#0076ff;stop-opacity:1;"
+         offset="0.592156862745098"
+         id="WL151nm" />
+      <stop
+         style="stop-color:#0070ff;stop-opacity:1;"
+         offset="0.596078431372549"
+         id="WL152nm" />
+      <stop
+         style="stop-color:#006aff;stop-opacity:1;"
+         offset="0.6"
+         id="WL153nm" />
+      <stop
+         style="stop-color:#0064ff;stop-opacity:1;"
+         offset="0.6039215686274509"
+         id="WL154nm" />
+      <stop
+         style="stop-color:#005eff;stop-opacity:1;"
+         offset="0.6078431372549019"
+         id="WL155nm" />
+      <stop
+         style="stop-color:#0058ff;stop-opacity:1;"
+         offset="0.611764705882353"
+         id="WL156nm" />
+      <stop
+         style="stop-color:#0052ff;stop-opacity:1;"
+         offset="0.615686274509804"
+         id="WL157nm" />
+      <stop
+         style="stop-color:#004cff;stop-opacity:1;"
+         offset="0.6196078431372549"
+         id="WL158nm" />
+      <stop
+         style="stop-color:#0046ff;stop-opacity:1;"
+         offset="0.6235294117647059"
+         id="WL159nm" />
+      <stop
+         style="stop-color:#0040ff;stop-opacity:1;"
+         offset="0.6274509803921569"
+         id="WL160nm" />
+      <stop
+         style="stop-color:#003aff;stop-opacity:1;"
+         offset="0.6313725490196078"
+         id="WL161nm" />
+      <stop
+         style="stop-color:#0034ff;stop-opacity:1;"
+         offset="0.6352941176470588"
+         id="WL162nm" />
+      <stop
+         style="stop-color:#002eff;stop-opacity:1;"
+         offset="0.6392156862745098"
+         id="WL163nm" />
+      <stop
+         style="stop-color:#0028ff;stop-opacity:1;"
+         offset="0.6431372549019608"
+         id="WL164nm" />
+      <stop
+         style="stop-color:#0022ff;stop-opacity:1;"
+         offset="0.6470588235294118"
+         id="WL165nm" />
+      <stop
+         style="stop-color:#001cff;stop-opacity:1;"
+         offset="0.6509803921568628"
+         id="WL166nm" />
+      <stop
+         style="stop-color:#0016ff;stop-opacity:1;"
+         offset="0.6549019607843137"
+         id="WL167nm" />
+      <stop
+         style="stop-color:#0010ff;stop-opacity:1;"
+         offset="0.6588235294117647"
+         id="WL168nm" />
+      <stop
+         style="stop-color:#000aff;stop-opacity:1;"
+         offset="0.6627450980392157"
+         id="WL169nm" />
+      <stop
+         style="stop-color:#0004ff;stop-opacity:1;"
+         offset="0.6666666666666666"
+         id="WL170nm" />
+      <stop
+         style="stop-color:#0200ff;stop-opacity:1;"
+         offset="0.6705882352941176"
+         id="WL171nm" />
+      <stop
+         style="stop-color:#0800ff;stop-opacity:1;"
+         offset="0.6745098039215687"
+         id="WL172nm" />
+      <stop
+         style="stop-color:#0e00ff;stop-opacity:1;"
+         offset="0.6784313725490196"
+         id="WL173nm" />
+      <stop
+         style="stop-color:#1400ff;stop-opacity:1;"
+         offset="0.6823529411764706"
+         id="WL174nm" />
+      <stop
+         style="stop-color:#1a00ff;stop-opacity:1;"
+         offset="0.6862745098039216"
+         id="WL175nm" />
+      <stop
+         style="stop-color:#2000ff;stop-opacity:1;"
+         offset="0.6901960784313725"
+         id="WL176nm" />
+      <stop
+         style="stop-color:#2600ff;stop-opacity:1;"
+         offset="0.6941176470588235"
+         id="WL177nm" />
+      <stop
+         style="stop-color:#2c00ff;stop-opacity:1;"
+         offset="0.6980392156862745"
+         id="WL178nm" />
+      <stop
+         style="stop-color:#3200ff;stop-opacity:1;"
+         offset="0.7019607843137254"
+         id="WL179nm" />
+      <stop
+         style="stop-color:#3800ff;stop-opacity:1;"
+         offset="0.7058823529411765"
+         id="WL180nm" />
+      <stop
+         style="stop-color:#3e00ff;stop-opacity:1;"
+         offset="0.7098039215686275"
+         id="WL181nm" />
+      <stop
+         style="stop-color:#4400ff;stop-opacity:1;"
+         offset="0.7137254901960784"
+         id="WL182nm" />
+      <stop
+         style="stop-color:#4a00ff;stop-opacity:1;"
+         offset="0.7176470588235294"
+         id="WL183nm" />
+      <stop
+         style="stop-color:#5000ff;stop-opacity:1;"
+         offset="0.7215686274509804"
+         id="WL184nm" />
+      <stop
+         style="stop-color:#5600ff;stop-opacity:1;"
+         offset="0.7254901960784313"
+         id="WL185nm" />
+      <stop
+         style="stop-color:#5c00ff;stop-opacity:1;"
+         offset="0.7294117647058823"
+         id="WL186nm" />
+      <stop
+         style="stop-color:#6200ff;stop-opacity:1;"
+         offset="0.7333333333333333"
+         id="WL187nm" />
+      <stop
+         style="stop-color:#6800ff;stop-opacity:1;"
+         offset="0.7372549019607844"
+         id="WL188nm" />
+      <stop
+         style="stop-color:#6e00ff;stop-opacity:1;"
+         offset="0.7411764705882353"
+         id="WL189nm" />
+      <stop
+         style="stop-color:#7400ff;stop-opacity:1;"
+         offset="0.7450980392156863"
+         id="WL190nm" />
+      <stop
+         style="stop-color:#7a00ff;stop-opacity:1;"
+         offset="0.7490196078431373"
+         id="WL191nm" />
+      <stop
+         style="stop-color:#8000ff;stop-opacity:1;"
+         offset="0.7529411764705882"
+         id="WL192nm" />
+      <stop
+         style="stop-color:#8500ff;stop-opacity:1;"
+         offset="0.7568627450980392"
+         id="WL193nm" />
+      <stop
+         style="stop-color:#8b00ff;stop-opacity:1;"
+         offset="0.7607843137254902"
+         id="WL194nm" />
+      <stop
+         style="stop-color:#9100ff;stop-opacity:1;"
+         offset="0.7647058823529411"
+         id="WL195nm" />
+      <stop
+         style="stop-color:#9700ff;stop-opacity:1;"
+         offset="0.7686274509803922"
+         id="WL196nm" />
+      <stop
+         style="stop-color:#9d00ff;stop-opacity:1;"
+         offset="0.7725490196078432"
+         id="WL197nm" />
+      <stop
+         style="stop-color:#a300ff;stop-opacity:1;"
+         offset="0.7764705882352941"
+         id="WL198nm" />
+      <stop
+         style="stop-color:#a900ff;stop-opacity:1;"
+         offset="0.7803921568627451"
+         id="WL199nm" />
+      <stop
+         style="stop-color:#af00ff;stop-opacity:1;"
+         offset="0.7843137254901961"
+         id="WL200nm" />
+      <stop
+         style="stop-color:#b500ff;stop-opacity:1;"
+         offset="0.788235294117647"
+         id="WL201nm" />
+      <stop
+         style="stop-color:#bb00ff;stop-opacity:1;"
+         offset="0.792156862745098"
+         id="WL202nm" />
+      <stop
+         style="stop-color:#c100ff;stop-opacity:1;"
+         offset="0.796078431372549"
+         id="WL203nm" />
+      <stop
+         style="stop-color:#c700ff;stop-opacity:1;"
+         offset="0.8"
+         id="WL204nm" />
+      <stop
+         style="stop-color:#cd00ff;stop-opacity:1;"
+         offset="0.803921568627451"
+         id="WL205nm" />
+      <stop
+         style="stop-color:#d300ff;stop-opacity:1;"
+         offset="0.807843137254902"
+         id="WL206nm" />
+      <stop
+         style="stop-color:#d900ff;stop-opacity:1;"
+         offset="0.8117647058823529"
+         id="WL207nm" />
+      <stop
+         style="stop-color:#df00ff;stop-opacity:1;"
+         offset="0.8156862745098039"
+         id="WL208nm" />
+      <stop
+         style="stop-color:#e500ff;stop-opacity:1;"
+         offset="0.8196078431372549"
+         id="WL209nm" />
+      <stop
+         style="stop-color:#eb00ff;stop-opacity:1;"
+         offset="0.8235294117647058"
+         id="WL210nm" />
+      <stop
+         style="stop-color:#f100ff;stop-opacity:1;"
+         offset="0.8274509803921568"
+         id="WL211nm" />
+      <stop
+         style="stop-color:#f700ff;stop-opacity:1;"
+         offset="0.8313725490196079"
+         id="WL212nm" />
+      <stop
+         style="stop-color:#fd00ff;stop-opacity:1;"
+         offset="0.8352941176470589"
+         id="WL213nm" />
+      <stop
+         style="stop-color:#ff00fb;stop-opacity:1;"
+         offset="0.8392156862745098"
+         id="WL214nm" />
+      <stop
+         style="stop-color:#ff00f5;stop-opacity:1;"
+         offset="0.8431372549019608"
+         id="WL215nm" />
+      <stop
+         style="stop-color:#ff00ef;stop-opacity:1;"
+         offset="0.8470588235294118"
+         id="WL216nm" />
+      <stop
+         style="stop-color:#ff00e9;stop-opacity:1;"
+         offset="0.8509803921568627"
+         id="WL217nm" />
+      <stop
+         style="stop-color:#ff00e3;stop-opacity:1;"
+         offset="0.8549019607843137"
+         id="WL218nm" />
+      <stop
+         style="stop-color:#ff00dd;stop-opacity:1;"
+         offset="0.8588235294117647"
+         id="WL219nm" />
+      <stop
+         style="stop-color:#ff00d7;stop-opacity:1;"
+         offset="0.8627450980392157"
+         id="WL220nm" />
+      <stop
+         style="stop-color:#ff00d1;stop-opacity:1;"
+         offset="0.8666666666666667"
+         id="WL221nm" />
+      <stop
+         style="stop-color:#ff00cb;stop-opacity:1;"
+         offset="0.8705882352941177"
+         id="WL222nm" />
+      <stop
+         style="stop-color:#ff00c5;stop-opacity:1;"
+         offset="0.8745098039215686"
+         id="WL223nm" />
+      <stop
+         style="stop-color:#ff00bf;stop-opacity:1;"
+         offset="0.8784313725490196"
+         id="WL224nm" />
+      <stop
+         style="stop-color:#ff00b9;stop-opacity:1;"
+         offset="0.8823529411764706"
+         id="WL225nm" />
+      <stop
+         style="stop-color:#ff00b3;stop-opacity:1;"
+         offset="0.8862745098039215"
+         id="WL226nm" />
+      <stop
+         style="stop-color:#ff00ad;stop-opacity:1;"
+         offset="0.8901960784313725"
+         id="WL227nm" />
+      <stop
+         style="stop-color:#ff00a7;stop-opacity:1;"
+         offset="0.8941176470588236"
+         id="WL228nm" />
+      <stop
+         style="stop-color:#ff00a1;stop-opacity:1;"
+         offset="0.8980392156862745"
+         id="WL229nm" />
+      <stop
+         style="stop-color:#ff009b;stop-opacity:1;"
+         offset="0.9019607843137255"
+         id="WL230nm" />
+      <stop
+         style="stop-color:#ff0095;stop-opacity:1;"
+         offset="0.9058823529411765"
+         id="WL231nm" />
+      <stop
+         style="stop-color:#ff008f;stop-opacity:1;"
+         offset="0.9098039215686274"
+         id="WL232nm" />
+      <stop
+         style="stop-color:#ff0089;stop-opacity:1;"
+         offset="0.9137254901960784"
+         id="WL233nm" />
+      <stop
+         style="stop-color:#ff0083;stop-opacity:1;"
+         offset="0.9176470588235294"
+         id="WL234nm" />
+      <stop
+         style="stop-color:#ff007e;stop-opacity:1;"
+         offset="0.9215686274509803"
+         id="WL235nm" />
+      <stop
+         style="stop-color:#ff0078;stop-opacity:1;"
+         offset="0.9254901960784314"
+         id="WL236nm" />
+      <stop
+         style="stop-color:#ff0072;stop-opacity:1;"
+         offset="0.9294117647058824"
+         id="WL237nm" />
+      <stop
+         style="stop-color:#ff006c;stop-opacity:1;"
+         offset="0.9333333333333333"
+         id="WL238nm" />
+      <stop
+         style="stop-color:#ff0066;stop-opacity:1;"
+         offset="0.9372549019607843"
+         id="WL239nm" />
+      <stop
+         style="stop-color:#ff0060;stop-opacity:1;"
+         offset="0.9411764705882353"
+         id="WL240nm" />
+      <stop
+         style="stop-color:#ff005a;stop-opacity:1;"
+         offset="0.9450980392156862"
+         id="WL241nm" />
+      <stop
+         style="stop-color:#ff0054;stop-opacity:1;"
+         offset="0.9490196078431372"
+         id="WL242nm" />
+      <stop
+         style="stop-color:#ff004e;stop-opacity:1;"
+         offset="0.9529411764705882"
+         id="WL243nm" />
+      <stop
+         style="stop-color:#ff0048;stop-opacity:1;"
+         offset="0.9568627450980393"
+         id="WL244nm" />
+      <stop
+         style="stop-color:#ff0042;stop-opacity:1;"
+         offset="0.9607843137254902"
+         id="WL245nm" />
+      <stop
+         style="stop-color:#ff003c;stop-opacity:1;"
+         offset="0.9647058823529412"
+         id="WL246nm" />
+      <stop
+         style="stop-color:#ff0036;stop-opacity:1;"
+         offset="0.9686274509803922"
+         id="WL247nm" />
+      <stop
+         style="stop-color:#ff0030;stop-opacity:1;"
+         offset="0.9725490196078431"
+         id="WL248nm" />
+      <stop
+         style="stop-color:#ff002a;stop-opacity:1;"
+         offset="0.9764705882352941"
+         id="WL249nm" />
+      <stop
+         style="stop-color:#ff0024;stop-opacity:1;"
+         offset="0.9803921568627451"
+         id="WL250nm" />
+      <stop
+         style="stop-color:#ff001e;stop-opacity:1;"
+         offset="0.984313725490196"
+         id="WL251nm" />
+      <stop
+         style="stop-color:#ff0018;stop-opacity:1;"
+         offset="0.9882352941176471"
+         id="WL252nm" />
+      <stop
+         style="stop-color:#ff0012;stop-opacity:1;"
+         offset="0.9921568627450981"
+         id="WL253nm" />
+      <stop
+         style="stop-color:#ff000c;stop-opacity:1;"
+         offset="0.996078431372549"
+         id="WL254nm" />
+      <stop
+         style="stop-color:#ff0006;stop-opacity:1;"
+         offset="1.0"
+         id="WL255nm" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3142"
+       id="linearGradient3148"
+       x1="657.99335"
+       y1="391.43365"
+       x2="79.314987"
+       y2="391.43365"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.5555556,0,0,0.619469,-1062.9786,-351.77846)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3142-7"
+       id="linearGradient3148-1"
+       x1="54.285713"
+       y1="405.21933"
+       x2="697.14282"
+       y2="405.21933"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.5555556,0,0,0.619469,-1062.9786,-351.77846)" />
+    <linearGradient
+       id="linearGradient3142-7">
+      <stop
+         style="stop-color:#00121F;stop-opacity:1;"
+         offset="0"
+         id="WL380nm-4" />
+      <stop
+         style="stop-color:#00121F;stop-opacity:1;"
+         offset="0.00602409638554217"
+         id="WL381nm-0" />
+      <stop
+         style="stop-color:#00121F;stop-opacity:1;"
+         offset="0.0120481927710843"
+         id="WL383nm-9" />
+      <stop
+         style="stop-color:#00121F;stop-opacity:1;"
+         offset="0.0180722891566265"
+         id="WL385nm-4" />
+      <stop
+         style="stop-color:#00121F;stop-opacity:1;"
+         offset="0.0240963855421687"
+         id="WL387nm-8" />
+      <stop
+         style="stop-color:#001930;stop-opacity:1;"
+         offset="0.0301204819277108"
+         id="WL389nm-8" />
+      <stop
+         style="stop-color:#001930;stop-opacity:1;"
+         offset="0.036144578313253"
+         id="WL391nm-2" />
+      <stop
+         style="stop-color:#240036;stop-opacity:1;"
+         offset="0.0421686746987952"
+         id="WL393nm-4" />
+      <stop
+         style="stop-color:#24003E;stop-opacity:1;"
+         offset="0.0481927710843374"
+         id="WL395nm-5" />
+      <stop
+         style="stop-color:#1F0043;stop-opacity:1;"
+         offset="0.0542168674698795"
+         id="WL397nm-5" />
+      <stop
+         style="stop-color:#190048;stop-opacity:1;"
+         offset="0.0602409638554217"
+         id="WL399nm-1" />
+      <stop
+         style="stop-color:#330052;stop-opacity:1;"
+         offset="0.0662650602409639"
+         id="WL401nm-7" />
+      <stop
+         style="stop-color:#2C0059;stop-opacity:1;"
+         offset="0.072289156626506"
+         id="WL403nm-1" />
+      <stop
+         style="stop-color:#240061;stop-opacity:1;"
+         offset="0.0783132530120482"
+         id="WL405nm-1" />
+      <stop
+         style="stop-color:#1F006A;stop-opacity:1;"
+         offset="0.0843373493975904"
+         id="WL407nm-5" />
+      <stop
+         style="stop-color:#2C0078;stop-opacity:1;"
+         offset="0.0903614457831325"
+         id="WL409nm-2" />
+      <stop
+         style="stop-color:#360087;stop-opacity:1;"
+         offset="0.0963855421686747"
+         id="WL411nm-7" />
+      <stop
+         style="stop-color:#390096;stop-opacity:1;"
+         offset="0.102409638554217"
+         id="WL413nm-6" />
+      <stop
+         style="stop-color:#4C00A8;stop-opacity:1;"
+         offset="0.108433734939759"
+         id="WL415nm-1" />
+      <stop
+         style="stop-color:#5500BC;stop-opacity:1;"
+         offset="0.114457831325301"
+         id="WL417nm-4" />
+      <stop
+         style="stop-color:#5200CD;stop-opacity:1;"
+         offset="0.120481927710843"
+         id="WL419nm-2" />
+      <stop
+         style="stop-color:#6100E2;stop-opacity:1;"
+         offset="0.126506024096386"
+         id="WL421nm-3" />
+      <stop
+         style="stop-color:#6B00F8;stop-opacity:1;"
+         offset="0.132530120481928"
+         id="WL423nm-2" />
+      <stop
+         style="stop-color:#6E00FF;stop-opacity:1;"
+         offset="0.13855421686747"
+         id="WL425nm-2" />
+      <stop
+         style="stop-color:#7000FF;stop-opacity:1;"
+         offset="0.144578313253012"
+         id="WL427nm-1" />
+      <stop
+         style="stop-color:#6E00FF;stop-opacity:1;"
+         offset="0.150602409638554"
+         id="WL429nm-6" />
+      <stop
+         style="stop-color:#6C00FF;stop-opacity:1;"
+         offset="0.156626506024096"
+         id="WL431nm-8" />
+      <stop
+         style="stop-color:#6E00FF;stop-opacity:1;"
+         offset="0.162650602409639"
+         id="WL433nm-5" />
+      <stop
+         style="stop-color:#7000FF;stop-opacity:1;"
+         offset="0.168674698795181"
+         id="WL435nm-7" />
+      <stop
+         style="stop-color:#6F00FF;stop-opacity:1;"
+         offset="0.174698795180723"
+         id="WL437nm-6" />
+      <stop
+         style="stop-color:#6C00FF;stop-opacity:1;"
+         offset="0.180722891566265"
+         id="WL439nm-1" />
+      <stop
+         style="stop-color:#6A00FF;stop-opacity:1;"
+         offset="0.186746987951807"
+         id="WL441nm-8" />
+      <stop
+         style="stop-color:#6700FF;stop-opacity:1;"
+         offset="0.192771084337349"
+         id="WL443nm-9" />
+      <stop
+         style="stop-color:#6700FF;stop-opacity:1;"
+         offset="0.198795180722892"
+         id="WL445nm-2" />
+      <stop
+         style="stop-color:#6100FF;stop-opacity:1;"
+         offset="0.204819277108434"
+         id="WL447nm-7" />
+      <stop
+         style="stop-color:#5C00FF;stop-opacity:1;"
+         offset="0.210843373493976"
+         id="WL449nm-9" />
+      <stop
+         style="stop-color:#5700FF;stop-opacity:1;"
+         offset="0.216867469879518"
+         id="WL451nm-5" />
+      <stop
+         style="stop-color:#5900FF;stop-opacity:1;"
+         offset="0.22289156626506"
+         id="WL453nm-4" />
+      <stop
+         style="stop-color:#5400FF;stop-opacity:1;"
+         offset="0.228915662650602"
+         id="WL455nm-3" />
+      <stop
+         style="stop-color:#4E00FF;stop-opacity:1;"
+         offset="0.234939759036145"
+         id="WL457nm-1" />
+      <stop
+         style="stop-color:#4300FF;stop-opacity:1;"
+         offset="0.240963855421687"
+         id="WL459nm-2" />
+      <stop
+         style="stop-color:#3300FF;stop-opacity:1;"
+         offset="0.246987951807229"
+         id="WL461nm-3" />
+      <stop
+         style="stop-color:#1F00FF;stop-opacity:1;"
+         offset="0.253012048192771"
+         id="WL463nm-3" />
+      <stop
+         style="stop-color:#0019FF;stop-opacity:1;"
+         offset="0.259036144578313"
+         id="WL465nm-4" />
+      <stop
+         style="stop-color:#003CFF;stop-opacity:1;"
+         offset="0.265060240963855"
+         id="WL467nm-1" />
+      <stop
+         style="stop-color:#0050FF;stop-opacity:1;"
+         offset="0.271084337349398"
+         id="WL469nm-1" />
+      <stop
+         style="stop-color:#0061FF;stop-opacity:1;"
+         offset="0.27710843373494"
+         id="WL471nm-3" />
+      <stop
+         style="stop-color:#0070FF;stop-opacity:1;"
+         offset="0.283132530120482"
+         id="WL473nm-8" />
+      <stop
+         style="stop-color:#007FFF;stop-opacity:1;"
+         offset="0.289156626506024"
+         id="WL475nm-7" />
+      <stop
+         style="stop-color:#008DFF;stop-opacity:1;"
+         offset="0.295180722891566"
+         id="WL477nm-4" />
+      <stop
+         style="stop-color:#009DFF;stop-opacity:1;"
+         offset="0.301204819277108"
+         id="WL479nm-2" />
+      <stop
+         style="stop-color:#00A3FA;stop-opacity:1;"
+         offset="0.307228915662651"
+         id="WL481nm-7" />
+      <stop
+         style="stop-color:#00B1F5;stop-opacity:1;"
+         offset="0.313253012048193"
+         id="WL483nm-7" />
+      <stop
+         style="stop-color:#00B6ED;stop-opacity:1;"
+         offset="0.319277108433735"
+         id="WL485nm-9" />
+      <stop
+         style="stop-color:#00BBE6;stop-opacity:1;"
+         offset="0.325301204819277"
+         id="WL487nm-3" />
+      <stop
+         style="stop-color:#00C4E1;stop-opacity:1;"
+         offset="0.331325301204819"
+         id="WL489nm-1" />
+      <stop
+         style="stop-color:#00CDDD;stop-opacity:1;"
+         offset="0.337349397590361"
+         id="WL491nm-9" />
+      <stop
+         style="stop-color:#00D6DA;stop-opacity:1;"
+         offset="0.343373493975904"
+         id="WL493nm-8" />
+      <stop
+         style="stop-color:#00DFD8;stop-opacity:1;"
+         offset="0.349397590361446"
+         id="WL495nm-6" />
+      <stop
+         style="stop-color:#00E3D5;stop-opacity:1;"
+         offset="0.355421686746988"
+         id="WL497nm-5" />
+      <stop
+         style="stop-color:#00EBD4;stop-opacity:1;"
+         offset="0.36144578313253"
+         id="WL499nm-0" />
+      <stop
+         style="stop-color:#00F6D5;stop-opacity:1;"
+         offset="0.367469879518072"
+         id="WL501nm-2" />
+      <stop
+         style="stop-color:#00FDD4;stop-opacity:1;"
+         offset="0.373493975903614"
+         id="WL503nm-8" />
+      <stop
+         style="stop-color:#00FFCF;stop-opacity:1;"
+         offset="0.379518072289157"
+         id="WL505nm-6" />
+      <stop
+         style="stop-color:#00FFCA;stop-opacity:1;"
+         offset="0.385542168674699"
+         id="WL507nm-0" />
+      <stop
+         style="stop-color:#00FFC4;stop-opacity:1;"
+         offset="0.391566265060241"
+         id="WL509nm-2" />
+      <stop
+         style="stop-color:#00FFBF;stop-opacity:1;"
+         offset="0.397590361445783"
+         id="WL511nm-4" />
+      <stop
+         style="stop-color:#00FFBA;stop-opacity:1;"
+         offset="0.403614457831325"
+         id="WL513nm-8" />
+      <stop
+         style="stop-color:#00FFB5;stop-opacity:1;"
+         offset="0.409638554216867"
+         id="WL515nm-6" />
+      <stop
+         style="stop-color:#00FFB2;stop-opacity:1;"
+         offset="0.41566265060241"
+         id="WL517nm-5" />
+      <stop
+         style="stop-color:#00FFAD;stop-opacity:1;"
+         offset="0.421686746987952"
+         id="WL519nm-0" />
+      <stop
+         style="stop-color:#00FFAA;stop-opacity:1;"
+         offset="0.427710843373494"
+         id="WL521nm-9" />
+      <stop
+         style="stop-color:#00FFA6;stop-opacity:1;"
+         offset="0.433734939759036"
+         id="WL523nm-0" />
+      <stop
+         style="stop-color:#00FFA4;stop-opacity:1;"
+         offset="0.439759036144578"
+         id="WL525nm-0" />
+      <stop
+         style="stop-color:#00FFA0;stop-opacity:1;"
+         offset="0.44578313253012"
+         id="WL527nm-6" />
+      <stop
+         style="stop-color:#00FF9C;stop-opacity:1;"
+         offset="0.451807228915663"
+         id="WL529nm-1" />
+      <stop
+         style="stop-color:#00FF97;stop-opacity:1;"
+         offset="0.457831325301205"
+         id="WL531nm-3" />
+      <stop
+         style="stop-color:#00FF94;stop-opacity:1;"
+         offset="0.463855421686747"
+         id="WL533nm-8" />
+      <stop
+         style="stop-color:#00FF8E;stop-opacity:1;"
+         offset="0.469879518072289"
+         id="WL535nm-9" />
+      <stop
+         style="stop-color:#00FF8B;stop-opacity:1;"
+         offset="0.475903614457831"
+         id="WL537nm-3" />
+      <stop
+         style="stop-color:#00FF82;stop-opacity:1;"
+         offset="0.481927710843373"
+         id="WL539nm-4" />
+      <stop
+         style="stop-color:#00FF7E;stop-opacity:1;"
+         offset="0.487951807228916"
+         id="WL541nm-4" />
+      <stop
+         style="stop-color:#00FF76;stop-opacity:1;"
+         offset="0.493975903614458"
+         id="WL543nm-6" />
+      <stop
+         style="stop-color:#00FF6A;stop-opacity:1;"
+         offset="0.5"
+         id="WL545nm-0" />
+      <stop
+         style="stop-color:#00FF5C;stop-opacity:1;"
+         offset="0.506024096385542"
+         id="WL547nm-6" />
+      <stop
+         style="stop-color:#00FF46;stop-opacity:1;"
+         offset="0.512048192771084"
+         id="WL549nm-6" />
+      <stop
+         style="stop-color:#00FF24;stop-opacity:1;"
+         offset="0.518072289156627"
+         id="WL551nm-1" />
+      <stop
+         style="stop-color:#39FF00;stop-opacity:1;"
+         offset="0.524096385542169"
+         id="WL553nm-8" />
+      <stop
+         style="stop-color:#59FF00;stop-opacity:1;"
+         offset="0.530120481927711"
+         id="WL555nm-4" />
+      <stop
+         style="stop-color:#73FF00;stop-opacity:1;"
+         offset="0.536144578313253"
+         id="WL557nm-9" />
+      <stop
+         style="stop-color:#8AFF00;stop-opacity:1;"
+         offset="0.542168674698795"
+         id="WL559nm-6" />
+      <stop
+         style="stop-color:#9DFF00;stop-opacity:1;"
+         offset="0.548192771084337"
+         id="WL561nm-3" />
+      <stop
+         style="stop-color:#ABFF00;stop-opacity:1;"
+         offset="0.55421686746988"
+         id="WL563nm-7" />
+      <stop
+         style="stop-color:#BBFA00;stop-opacity:1;"
+         offset="0.560240963855422"
+         id="WL565nm-8" />
+      <stop
+         style="stop-color:#C7F600;stop-opacity:1;"
+         offset="0.566265060240964"
+         id="WL567nm-8" />
+      <stop
+         style="stop-color:#D5F100;stop-opacity:1;"
+         offset="0.572289156626506"
+         id="WL569nm-2" />
+      <stop
+         style="stop-color:#DFEC00;stop-opacity:1;"
+         offset="0.578313253012048"
+         id="WL571nm-9" />
+      <stop
+         style="stop-color:#EAE600;stop-opacity:1;"
+         offset="0.58433734939759"
+         id="WL573nm-1" />
+      <stop
+         style="stop-color:#F3E100;stop-opacity:1;"
+         offset="0.590361445783133"
+         id="WL575nm-3" />
+      <stop
+         style="stop-color:#FDDA00;stop-opacity:1;"
+         offset="0.596385542168675"
+         id="WL577nm-5" />
+      <stop
+         style="stop-color:#FFCE00;stop-opacity:1;"
+         offset="0.602409638554217"
+         id="WL579nm-9" />
+      <stop
+         style="stop-color:#FFC000;stop-opacity:1;"
+         offset="0.608433734939759"
+         id="WL581nm-8" />
+      <stop
+         style="stop-color:#FFB300;stop-opacity:1;"
+         offset="0.614457831325301"
+         id="WL583nm-4" />
+      <stop
+         style="stop-color:#FFA800;stop-opacity:1;"
+         offset="0.620481927710843"
+         id="WL585nm-0" />
+      <stop
+         style="stop-color:#FF9C00;stop-opacity:1;"
+         offset="0.626506024096386"
+         id="WL587nm-7" />
+      <stop
+         style="stop-color:#FF9100;stop-opacity:1;"
+         offset="0.632530120481928"
+         id="WL589nm-6" />
+      <stop
+         style="stop-color:#FF8700;stop-opacity:1;"
+         offset="0.63855421686747"
+         id="WL591nm-3" />
+      <stop
+         style="stop-color:#FF7C00;stop-opacity:1;"
+         offset="0.644578313253012"
+         id="WL593nm-6" />
+      <stop
+         style="stop-color:#FF7000;stop-opacity:1;"
+         offset="0.650602409638554"
+         id="WL595nm-1" />
+      <stop
+         style="stop-color:#FF6A00;stop-opacity:1;"
+         offset="0.656626506024096"
+         id="WL597nm-5" />
+      <stop
+         style="stop-color:#FF5E00;stop-opacity:1;"
+         offset="0.662650602409639"
+         id="WL599nm-4" />
+      <stop
+         style="stop-color:#FF5500;stop-opacity:1;"
+         offset="0.668674698795181"
+         id="WL601nm-2" />
+      <stop
+         style="stop-color:#FF4800;stop-opacity:1;"
+         offset="0.674698795180723"
+         id="WL603nm-0" />
+      <stop
+         style="stop-color:#FF4100;stop-opacity:1;"
+         offset="0.680722891566265"
+         id="WL605nm-9" />
+      <stop
+         style="stop-color:#FF3300;stop-opacity:1;"
+         offset="0.686746987951807"
+         id="WL607nm-7" />
+      <stop
+         style="stop-color:#FF2C00;stop-opacity:1;"
+         offset="0.692771084337349"
+         id="WL609nm-3" />
+      <stop
+         style="stop-color:#FF1200;stop-opacity:1;"
+         offset="0.698795180722892"
+         id="WL611nm-7" />
+      <stop
+         style="stop-color:#FF0012;stop-opacity:1;"
+         offset="0.704819277108434"
+         id="WL613nm-2" />
+      <stop
+         style="stop-color:#FF0028;stop-opacity:1;"
+         offset="0.710843373493976"
+         id="WL615nm-6" />
+      <stop
+         style="stop-color:#FF002C;stop-opacity:1;"
+         offset="0.716867469879518"
+         id="WL617nm-0" />
+      <stop
+         style="stop-color:#FF0036;stop-opacity:1;"
+         offset="0.72289156626506"
+         id="WL619nm-1" />
+      <stop
+         style="stop-color:#FF003C;stop-opacity:1;"
+         offset="0.728915662650602"
+         id="WL621nm-6" />
+      <stop
+         style="stop-color:#FF0041;stop-opacity:1;"
+         offset="0.734939759036145"
+         id="WL623nm-5" />
+      <stop
+         style="stop-color:#FF0041;stop-opacity:1;"
+         offset="0.740963855421687"
+         id="WL625nm-7" />
+      <stop
+         style="stop-color:#FF0043;stop-opacity:1;"
+         offset="0.746987951807229"
+         id="WL627nm-5" />
+      <stop
+         style="stop-color:#FF0043;stop-opacity:1;"
+         offset="0.753012048192771"
+         id="WL629nm-4" />
+      <stop
+         style="stop-color:#FF004C;stop-opacity:1;"
+         offset="0.759036144578313"
+         id="WL631nm-1" />
+      <stop
+         style="stop-color:#FF0048;stop-opacity:1;"
+         offset="0.765060240963855"
+         id="WL633nm-2" />
+      <stop
+         style="stop-color:#FF004A;stop-opacity:1;"
+         offset="0.771084337349398"
+         id="WL635nm-0" />
+      <stop
+         style="stop-color:#F7004A;stop-opacity:1;"
+         offset="0.77710843373494"
+         id="WL637nm-0" />
+      <stop
+         style="stop-color:#F3004E;stop-opacity:1;"
+         offset="0.783132530120482"
+         id="WL639nm-1" />
+      <stop
+         style="stop-color:#E80046;stop-opacity:1;"
+         offset="0.789156626506024"
+         id="WL641nm-4" />
+      <stop
+         style="stop-color:#E00046;stop-opacity:1;"
+         offset="0.795180722891566"
+         id="WL643nm-6" />
+      <stop
+         style="stop-color:#D70043;stop-opacity:1;"
+         offset="0.801204819277108"
+         id="WL645nm-0" />
+      <stop
+         style="stop-color:#CF003E;stop-opacity:1;"
+         offset="0.807228915662651"
+         id="WL647nm-7" />
+      <stop
+         style="stop-color:#C90043;stop-opacity:1;"
+         offset="0.813253012048193"
+         id="WL649nm-1" />
+      <stop
+         style="stop-color:#BF003E;stop-opacity:1;"
+         offset="0.819277108433735"
+         id="WL651nm-7" />
+      <stop
+         style="stop-color:#B50039;stop-opacity:1;"
+         offset="0.825301204819277"
+         id="WL653nm-7" />
+      <stop
+         style="stop-color:#AF0039;stop-opacity:1;"
+         offset="0.831325301204819"
+         id="WL655nm-7" />
+      <stop
+         style="stop-color:#A9003C;stop-opacity:1;"
+         offset="0.837349397590361"
+         id="WL657nm-7" />
+      <stop
+         style="stop-color:#9D0036;stop-opacity:1;"
+         offset="0.843373493975904"
+         id="WL659nm-3" />
+      <stop
+         style="stop-color:#970030;stop-opacity:1;"
+         offset="0.849397590361446"
+         id="WL661nm-3" />
+      <stop
+         style="stop-color:#8F0030;stop-opacity:1;"
+         offset="0.855421686746988"
+         id="WL663nm-5" />
+      <stop
+         style="stop-color:#880030;stop-opacity:1;"
+         offset="0.86144578313253"
+         id="WL665nm-9" />
+      <stop
+         style="stop-color:#800028;stop-opacity:1;"
+         offset="0.867469879518072"
+         id="WL667nm-9" />
+      <stop
+         style="stop-color:#760028;stop-opacity:1;"
+         offset="0.873493975903614"
+         id="WL669nm-8" />
+      <stop
+         style="stop-color:#6E001F;stop-opacity:1;"
+         offset="0.879518072289157"
+         id="WL671nm-1" />
+      <stop
+         style="stop-color:#640019;stop-opacity:1;"
+         offset="0.885542168674699"
+         id="WL673nm-8" />
+      <stop
+         style="stop-color:#620024;stop-opacity:1;"
+         offset="0.891566265060241"
+         id="WL675nm-2" />
+      <stop
+         style="stop-color:#620024;stop-opacity:1;"
+         offset="0.897590361445783"
+         id="WL677nm-6" />
+      <stop
+         style="stop-color:#570019;stop-opacity:1;"
+         offset="0.903614457831325"
+         id="WL679nm-6" />
+      <stop
+         style="stop-color:#4A0000;stop-opacity:1;"
+         offset="0.909638554216867"
+         id="WL681nm-0" />
+      <stop
+         style="stop-color:#550024;stop-opacity:1;"
+         offset="0.91566265060241"
+         id="WL683nm-3" />
+      <stop
+         style="stop-color:#460019;stop-opacity:1;"
+         offset="0.921686746987952"
+         id="WL685nm-8" />
+      <stop
+         style="stop-color:#460019;stop-opacity:1;"
+         offset="0.927710843373494"
+         id="WL687nm-0" />
+      <stop
+         style="stop-color:#330000;stop-opacity:1;"
+         offset="0.933734939759036"
+         id="WL689nm-1" />
+      <stop
+         style="stop-color:#330000;stop-opacity:1;"
+         offset="0.939759036144578"
+         id="WL691nm-2" />
+      <stop
+         style="stop-color:#330000;stop-opacity:1;"
+         offset="0.94578313253012"
+         id="WL693nm-5" />
+      <stop
+         style="stop-color:#330000;stop-opacity:1;"
+         offset="0.951807228915663"
+         id="WL695nm-0" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.957831325301205"
+         id="WL697nm-9" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.963855421686747"
+         id="WL699nm-4" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.969879518072289"
+         id="WL701nm-7" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.975903614457831"
+         id="WL703nm-8" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.981927710843373"
+         id="WL705nm-3" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.987951807228916"
+         id="WL707nm-5" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="0.993975903614458"
+         id="WL709nm-1" />
+      <stop
+         style="stop-color:#300019;stop-opacity:1;"
+         offset="1.0"
+         id="WL710nm-2" />
+    </linearGradient>
+    <linearGradient
+       y2="405.21933"
+       x2="697.14282"
+       y1="405.21933"
+       x1="54.285713"
+       gradientTransform="matrix(1.5555556,0,0,0.619469,-965.82894,-668.80062)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4110"
+       xlink:href="#linearGradient3142-7"
+       inkscape:collect="always" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.1739077"
+     inkscape:cx="634.34681"
+     inkscape:cy="159.98552"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     width="1000px"
+     height="200px"
+     showgrid="false"
+     fit-margin-top="12"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="5"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="0,1"
+       position="60.875,5.1562806"
+       id="guide4001" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="496.64,148.48"
+       id="guide3421" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-39.138591,11.747452)">
+    <rect
+       style="fill:url(#linearGradient3148);fill-opacity:1;stroke:none"
+       id="rect2160"
+       width="900.24731"
+       height="200.25253"
+       x="-939.39069"
+       y="-200.50508"
+       transform="scale(-1,-1)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 40.138591,201.48839 0,50"
+       id="path3152"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 938.403,201.49621 0,50"
+       id="path3152-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 489.15512,201.50507 0,24"
+       id="path3152-7-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cambria Math;-inkscape-font-specification:Cambria Math"
+       x="52.400311"
+       y="252.62122"
+       id="text3976"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3978"
+         x="52.400311"
+         y="252.62122"
+         style="font-size:20px">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="473.67093"
+       y="252.62122"
+       id="text4003"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4005"
+         x="473.67093"
+         y="252.62122"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Cambria Math;-inkscape-font-specification:Cambria Math">250</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="890.78473"
+       y="252.62122"
+       id="text4007"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4009"
+         x="890.78473"
+         y="252.62122"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Cambria Math;-inkscape-font-specification:Cambria Math">500</tspan></text>
+  </g>
+</svg>
